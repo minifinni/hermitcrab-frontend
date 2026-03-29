@@ -1,5 +1,5 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.hermitcrab.app";
-const API_KEY = process.env.HERMITCRAB_API_KEY || "";
+const API_KEY = process.env.NEXT_PUBLIC_HERMITCRAB_API_KEY || process.env.HERMITCRAB_API_KEY || "";
 
 async function apiFetch(path: string, options?: RequestInit) {
   const res = await fetch(`${API_URL}${path}`, {
