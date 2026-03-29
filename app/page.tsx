@@ -1,7 +1,5 @@
 import Link from "next/link";
-import SkillCard from "@/components/SkillCard";
-import { getSkills, getDomains, domainEmoji, domainLabel, DOMAIN_META } from "@/lib/api";
-import { CATEGORIES } from "@/lib/mockData";
+import { getSkills, getDomains, domainLabel, DOMAIN_META } from "@/lib/api";
 
 export const revalidate = 60;
 
@@ -20,7 +18,7 @@ export default async function HomePage() {
   return (
     <div className="flex flex-col">
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden bg-[#0d0f14] scanlines">
+      <section className="relative overflow-hidden bg-[#0d0f14]">
         <div
           className="absolute inset-0 opacity-10"
           style={{
@@ -51,14 +49,14 @@ export default async function HomePage() {
           </h1>
 
           <p className="text-sm text-gray-400 max-w-lg leading-relaxed">
-            You ask <span className="text-white">"why is my sauce gluey?"</span> — your AI retrieves the exact principle, the science behind it, and a direct quote from the expert who figured it out.{" "}
-            <span className="text-amber-400">Not a prompt. A brain.</span>
+            Vector embeddings. Knowledge graphs. Semantic retrieval.{" "}
+            <span className="text-amber-400">Not a .md file.</span>
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
               href="/skills"
-              className="text-[10px] bg-amber-500 hover:bg-amber-400 text-black font-bold px-6 py-3 transition-all duration-100 active:translate-x-0.5 active:translate-y-0.5"
+              className="text-[10px] bg-amber-500 hover:bg-amber-400 text-black font-bold px-6 py-3 transition-all duration-100"
               style={{ fontFamily: "'Press Start 2P', monospace", boxShadow: "3px 3px 0px #000" }}
             >
               Browse Skills
@@ -79,17 +77,14 @@ export default async function HomePage() {
         <div className="max-w-5xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-3 gap-6">
           {[
             {
-              icon: "🧠",
               title: "The Why, Not Just the What",
               body: "Every technique comes with the reasoning behind it. Not \"add cheese off heat\" — but why proteins seize above 85°C, and what that means for every sauce you'll ever make.",
             },
             {
-              icon: "🔍",
               title: "Ask, Don't Search",
               body: "\"Why is my crust soft?\" retrieves the exact principle, the expert quote that explains it, and three related techniques. Your AI finds the answer — you don't have to know what to look for.",
             },
             {
-              icon: "🕸️",
               title: "Skills Talk to Each Other",
               body: "Carbonara emulsification connects to Cacio e Pepe connects to French butter sauces. Load one skill, your AI inherits the whole neighbourhood of related expertise.",
             },
@@ -99,7 +94,6 @@ export default async function HomePage() {
               className="bg-[#161920] border-2 border-[#2a2d35] p-6"
               style={{ boxShadow: "2px 2px 0px #000" }}
             >
-              <div className="text-3xl mb-3">{item.icon}</div>
               <h3
                 className="text-[9px] text-amber-400 mb-3"
                 style={{ fontFamily: "'Press Start 2P', monospace" }}
@@ -112,10 +106,9 @@ export default async function HomePage() {
         </div>
         <div className="max-w-5xl mx-auto px-4 mt-6">
           <div
-            className="bg-[#161920] border-2 border-amber-400/20 p-5 flex flex-col sm:flex-row items-start sm:items-center gap-4"
+            className="bg-[#161920] border-2 border-amber-400/20 p-5"
             style={{ boxShadow: "2px 2px 0px #000" }}
           >
-            <span className="text-2xl">🐚</span>
             <p className="text-xs text-gray-400 leading-relaxed">
               <span className="text-white font-medium">A prompt file tells your AI how to behave.</span>{" "}
               A hermitcrab skill gives it actual knowledge to retrieve — like the difference between telling someone "be a doctor" and handing them a searchable medical textbook written by the best doctors alive.
@@ -142,7 +135,7 @@ export default async function HomePage() {
           className="text-sm text-white mb-8"
           style={{ fontFamily: "'Press Start 2P', monospace" }}
         >
-          <span className="text-amber-400">▶</span> TRENDING SKILLS
+          TRENDING SKILLS
         </h2>
 
         <div className="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory">
@@ -154,7 +147,7 @@ export default async function HomePage() {
                   style={{ boxShadow: "2px 2px 0px #000" }}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-2xl">{domainEmoji(skill.domain)}</span>
+                    <span className="text-[8px] text-gray-500 uppercase tracking-widest">{skill.domain}</span>
                     <span className="text-[8px] text-amber-400 border border-amber-400/50 px-2 py-0.5"
                       style={{ fontFamily: "'Press Start 2P', monospace" }}>
                       FREE
@@ -166,12 +159,12 @@ export default async function HomePage() {
                       {skill.title}
                     </p>
                     {skill.chef && (
-                      <p className="text-[8px] text-gray-500 mt-1">by @{skill.chef.toLowerCase().replace(/\s+/g, '')}</p>
+                      <p className="text-[8px] text-gray-500 mt-1">@{skill.chef.toLowerCase().replace(/\s+/g, '')}</p>
                     )}
                   </div>
                   <div className="mt-auto flex items-center justify-between">
-                    <span className="text-amber-400 text-xs">★★★★☆</span>
                     <span className="text-[8px] text-gray-500">{skill.num_principles} principles</span>
+                    <span className="text-[8px] text-gray-600">{skill.techniques?.length || 0} techniques</span>
                   </div>
                 </div>
               </Link>
@@ -180,31 +173,28 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── Categories (real domains) ── */}
+      {/* ── Domains ── */}
       <section className="bg-[#161920]/50 border-y border-[#2a2d35] py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2
             className="text-sm text-white mb-8 text-center"
             style={{ fontFamily: "'Press Start 2P', monospace" }}
           >
-            <span className="text-amber-400">▶</span> BROWSE BY DOMAIN
+            BROWSE BY DOMAIN
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto">
-            {(domains.length > 0 ? domains : Object.entries(DOMAIN_META).map(([k, v]) => ({ domain: k, count: 0 }))).map((d) => (
+            {(domains.length > 0 ? domains : Object.keys(DOMAIN_META).map(k => ({ domain: k, count: 0 }))).map((d) => (
               <Link
                 key={d.domain}
                 href={`/skills?domain=${d.domain}`}
-                className="flex items-center gap-2 bg-[#161920] border-2 border-[#2a2d35] hover:border-amber-400 px-4 py-3 transition-all group"
+                className="flex items-center justify-between bg-[#161920] border-2 border-[#2a2d35] hover:border-amber-400 px-4 py-3 transition-all group"
                 style={{ boxShadow: "2px 2px 0px #000" }}
               >
-                <span className="text-lg">{domainEmoji(d.domain)}</span>
-                <div className="flex flex-col">
-                  <span className="text-[9px] text-gray-400 group-hover:text-amber-400 transition-colors"
-                    style={{ fontFamily: "'Press Start 2P', monospace" }}>
-                    {domainLabel(d.domain)}
-                  </span>
-                  {d.count > 0 && <span className="text-[7px] text-gray-600">{d.count} skills</span>}
-                </div>
+                <span className="text-[9px] text-gray-400 group-hover:text-amber-400 transition-colors uppercase"
+                  style={{ fontFamily: "'Press Start 2P', monospace" }}>
+                  {domainLabel(d.domain)}
+                </span>
+                {d.count > 0 && <span className="text-[7px] text-gray-600">{d.count}</span>}
               </Link>
             ))}
           </div>
@@ -228,7 +218,7 @@ export default async function HomePage() {
           className="text-[10px] bg-amber-500 hover:bg-amber-400 text-black font-bold px-8 py-4 inline-block transition-all"
           style={{ fontFamily: "'Press Start 2P', monospace", boxShadow: "3px 3px 0px #000" }}
         >
-          Start Creating →
+          Start Creating
         </Link>
       </section>
     </div>

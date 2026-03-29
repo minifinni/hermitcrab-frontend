@@ -31,7 +31,7 @@ export default async function SkillDetailPage({ params }: { params: { slug: stri
         <div className="bg-[#161920] border-2 border-[#2a2d35] p-8 mb-6"
           style={{ boxShadow: "3px 3px 0px #000" }}>
           <div className="flex items-start justify-between gap-4 mb-4">
-            <span className="text-5xl">{domainEmoji(skill.domain)}</span>
+            
             <span className="text-[8px] text-amber-400 border border-amber-400 px-3 py-1"
               style={{ fontFamily: "'Press Start 2P', monospace" }}>
               FREE

@@ -90,7 +90,7 @@ export default async function DashboardPage() {
         >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-[9px] text-amber-400" style={{ fontFamily: "'Press Start 2P', monospace" }}>🔑 API KEYS</p>
+              <p className="text-[9px] text-amber-400" style={{ fontFamily: "'Press Start 2P', monospace" }}>API KEYS</p>
               <p className="text-xs text-gray-400 mt-2">Generate a key to query hermitcrab from your agent or app</p>
             </div>
             <span className="text-amber-400 text-lg group-hover:translate-x-1 transition-transform">→</span>

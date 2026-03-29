@@ -51,7 +51,7 @@ export default function SkillsPage() {
               className={`text-[9px] px-4 py-2 border-2 transition-all ${activeDomain === d.domain ? "border-amber-400 text-amber-400 bg-amber-400/10" : "border-[#2a2d35] text-gray-400 hover:border-amber-400/50"}`}
               style={{ fontFamily: "'Press Start 2P', monospace", boxShadow: "2px 2px 0px #000" }}
             >
-              {domainEmoji(d.domain)} {d.domain.toUpperCase()} ({d.count})
+               {d.domain.toUpperCase()} ({d.count})
             </button>
           ))}
         </div>
@@ -76,7 +76,7 @@ export default function SkillsPage() {
                     style={{ boxShadow: "2px 2px 0px #000" }}
                   >
                     <div className="flex items-start justify-between gap-2">
-                      <span className="text-2xl">{domainEmoji(skill.domain)}</span>
+                      <span className="text-2xl"></span>
                       <span className="text-[8px] text-amber-400 border border-amber-400/50 px-2 py-0.5 shrink-0"
                         style={{ fontFamily: "'Press Start 2P', monospace" }}>
                         FREE

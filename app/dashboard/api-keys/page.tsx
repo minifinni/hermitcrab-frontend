@@ -107,7 +107,7 @@ export default function ApiKeysPage() {
           <div className="bg-[#0d0f14] border-2 border-amber-400 p-6 mb-6"
             style={{ boxShadow: "4px 4px 0px #f59e0b40" }}>
             <p className="text-[9px] text-amber-400 mb-3" style={{ fontFamily: "'Press Start 2P', monospace" }}>
-              ⚠ COPY YOUR KEY NOW — IT WON'T BE SHOWN AGAIN
+              COPY YOUR KEY NOW — IT WON'T BE SHOWN AGAIN
             </p>
             <div className="flex items-center gap-3 bg-[#161920] border border-[#2a2d35] p-3 mb-3">
               <code className="text-xs text-green-400 flex-1 break-all font-mono">{newKeyValue}</code>

@@ -19,7 +19,7 @@ export default function SkillCard({ skill, compact = false }: SkillCardProps) {
         {/* Header */}
         <div className="flex items-start justify-between gap-2">
           <div className="flex items-center gap-2">
-            <span className="text-2xl">{skill.emoji}</span>
+            <span className="text-2xl"></span>
             <div>
               <h3
                 className="text-[10px] text-white leading-tight group-hover:text-amber-400 transition-colors line-clamp-2"
