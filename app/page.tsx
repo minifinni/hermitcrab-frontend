@@ -32,13 +32,13 @@ export default async function HomePage() {
         <div className="relative z-10 max-w-4xl mx-auto px-4 py-24 flex flex-col items-center text-center gap-8">
           <div
             id="hermit-crab-stage"
-            className="flex items-center justify-center border-2 border-amber-400 bg-[#161920]"
-            style={{ width: 300, height: 200, boxShadow: "4px 4px 0px #000, 0 0 30px #f59e0b30", imageRendering: "pixelated" }}
+            className="flex items-center justify-center border-2 border-amber-400"
+            style={{ width: 300, height: 200, boxShadow: "4px 4px 0px #000, 0 0 30px #f59e0b30", background: "#0d0f14" }}
           >
             <img
               src="/crab.gif"
               alt="Hermit crab"
-              style={{ imageRendering: "pixelated", width: "auto", height: "160px" }}
+              style={{ imageRendering: "pixelated", width: "240px", height: "auto", mixBlendMode: "screen" }}
             />
           </div>
 
