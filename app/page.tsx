@@ -33,14 +33,13 @@ export default async function HomePage() {
           <div
             id="hermit-crab-stage"
             className="flex items-center justify-center border-2 border-amber-400 bg-[#161920]"
-            style={{ width: 300, height: 200, boxShadow: "4px 4px 0px #000, 0 0 30px #f59e0b30" }}
+            style={{ width: 300, height: 200, boxShadow: "4px 4px 0px #000, 0 0 30px #f59e0b30", imageRendering: "pixelated" }}
           >
-            <span
-              className="text-amber-400 text-[10px] animate-pulse text-center px-4"
-              style={{ fontFamily: "'Press Start 2P', monospace", lineHeight: "1.8" }}
-            >
-              [ CRAB GOES HERE ]
-            </span>
+            <img
+              src="/crab.gif"
+              alt="Hermit crab"
+              style={{ imageRendering: "pixelated", width: "auto", height: "160px" }}
+            />
           </div>
 
           <h1
