@@ -107,17 +107,45 @@ export default async function SkillDetailPage({ params }: { params: { slug: stri
           </div>
         )}
 
+        {/* What's inside */}
+        <div className="bg-[#161920] border-2 border-[#2a2d35] p-6 mb-6"
+          style={{ boxShadow: "2px 2px 0px #000" }}>
+          <h2 className="text-[9px] text-amber-400 mb-4" style={{ fontFamily: "'Press Start 2P', monospace" }}>
+            WHAT'S INSIDE
+          </h2>
+          <div className="grid grid-cols-3 gap-4 text-center">
+            <div className="bg-[#0d0f14] border border-[#2a2d35] p-4">
+              <div className="text-2xl font-bold text-amber-400">{skill.num_principles}</div>
+              <div className="text-[8px] text-gray-500 mt-1" style={{ fontFamily: "'Press Start 2P', monospace" }}>PRINCIPLES</div>
+            </div>
+            <div className="bg-[#0d0f14] border border-[#2a2d35] p-4">
+              <div className="text-2xl font-bold text-amber-400">{skill.techniques?.length || 0}</div>
+              <div className="text-[8px] text-gray-500 mt-1" style={{ fontFamily: "'Press Start 2P', monospace" }}>TECHNIQUES</div>
+            </div>
+            <div className="bg-[#0d0f14] border border-[#2a2d35] p-4">
+              <div className="text-2xl font-bold text-amber-400">
+                {skill.principles?.reduce((n: number, p: any) => n + (p.chef_quotes?.length || 0), 0) || 0}
+              </div>
+              <div className="text-[8px] text-gray-500 mt-1" style={{ fontFamily: "'Press Start 2P', monospace" }}>EXPERT QUOTES</div>
+            </div>
+          </div>
+          <p className="text-[10px] text-gray-500 mt-4 leading-relaxed">
+            This is a structured knowledge base — not a prompt file. Your AI retrieves principles semantically, understands the reasoning behind each technique, and connects to related skills via a knowledge graph.
+          </p>
+        </div>
+
         {/* Download CTA */}
         <div className="bg-[#161920] border-2 border-amber-400 p-8 mb-6 text-center"
           style={{ boxShadow: "4px 4px 0px #f59e0b40" }}>
-          <p className="text-[9px] text-gray-400 mb-4">Compatible with OpenClaw, Claude, ChatGPT</p>
+          <p className="text-[9px] text-gray-400 mb-2">Compatible with OpenClaw · Claude · ChatGPT</p>
+          <p className="text-[8px] text-gray-600 mb-5">{skill.num_principles} principles · semantic retrieval · knowledge graph</p>
           <button
             className="text-[10px] bg-amber-500 hover:bg-amber-400 text-black font-bold px-10 py-4 transition-all"
             style={{ fontFamily: "'Press Start 2P', monospace", boxShadow: "3px 3px 0px #000" }}
           >
             DOWNLOAD FREE →
           </button>
-          <p className="text-[8px] text-gray-600 mt-3">Auth coming soon · Free during beta</p>
+          <p className="text-[8px] text-gray-600 mt-3">Free during beta · Sign in to track your skills</p>
         </div>
 
         {/* Related */}

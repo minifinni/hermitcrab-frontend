@@ -52,8 +52,8 @@ export default async function HomePage() {
           </h1>
 
           <p className="text-sm text-gray-400 max-w-lg leading-relaxed">
-            Browse, rent, or download agent skills built by creators.{" "}
-            <span className="text-gray-300">Swap skills. Stay sharp.</span>
+            Each skill is a <span className="text-amber-400">structured knowledge base</span> — principles, techniques, expert frameworks, and semantic search. Not just prompts.{" "}
+            <span className="text-gray-300">Your AI thinks like an expert.</span>
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4">
@@ -71,6 +71,56 @@ export default async function HomePage() {
             >
               Sell Your Skill
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── What is a skill ── */}
+      <section className="border-b border-[#2a2d35] bg-[#0d0f14] py-14">
+        <div className="max-w-5xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {[
+            {
+              icon: "🧠",
+              title: "Deep Knowledge",
+              body: "Each skill contains hundreds of expert principles, techniques, and the reasoning behind them — extracted from the world's best practitioners.",
+            },
+            {
+              icon: "🔍",
+              title: "Semantic Search",
+              body: "Your AI retrieves the right knowledge for any situation. Ask a question, get expert-level context — not keyword matches.",
+            },
+            {
+              icon: "🕸️",
+              title: "Knowledge Graph",
+              body: "Skills connect to each other. Related techniques, shared equipment, overlapping frameworks — your AI navigates a web of expertise.",
+            },
+          ].map((item) => (
+            <div
+              key={item.title}
+              className="bg-[#161920] border-2 border-[#2a2d35] p-6"
+              style={{ boxShadow: "2px 2px 0px #000" }}
+            >
+              <div className="text-3xl mb-3">{item.icon}</div>
+              <h3
+                className="text-[9px] text-amber-400 mb-3"
+                style={{ fontFamily: "'Press Start 2P', monospace" }}
+              >
+                {item.title}
+              </h3>
+              <p className="text-xs text-gray-400 leading-relaxed">{item.body}</p>
+            </div>
+          ))}
+        </div>
+        <div className="max-w-5xl mx-auto px-4 mt-6">
+          <div
+            className="bg-[#161920] border-2 border-amber-400/20 p-5 flex flex-col sm:flex-row items-start sm:items-center gap-4"
+            style={{ boxShadow: "2px 2px 0px #000" }}
+          >
+            <span className="text-2xl">🐚</span>
+            <p className="text-xs text-gray-400 leading-relaxed">
+              <span className="text-white font-medium">Skills are not prompt files.</span>{" "}
+              They're structured databases of expert knowledge — principles with explanations, direct quotes, technique taxonomies, and interconnected concepts — all queryable by your AI in real time.
+            </p>
           </div>
         </div>
       </section>
