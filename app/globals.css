@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600;700&display=swap');
+/* ↑ loaded globally so Press Start 2P is available everywhere */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0d0f14;
+  --card: #161920;
+  --border: #2a2d35;
+  --amber: #f59e0b;
+  --amber-dark: #ea580c;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: #0d0f14;
+  color: #e5e7eb;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #161920;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2d35;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f59e0b;
+}
+
+/* Skill card hover */
+.skill-card-hover:hover {
+  box-shadow: 3px 3px 0px rgba(245, 158, 11, 0.4) !important;
+}
+
+/* Pixel border utility */
+.pixel-border {
+  border: 2px solid var(--border);
+  box-shadow: 2px 2px 0px #000;
+}
+
+.pixel-border-amber {
+  border: 2px solid var(--amber);
+  box-shadow: 2px 2px 0px #000;
+}
+
+/* Scanline overlay */
+.scanlines::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.12) 2px,
+    rgba(0, 0, 0, 0.12) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Pixel button */
+.btn-pixel {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  padding: 10px 20px;
+  border: 2px solid currentColor;
+  cursor: pointer;
+  transition: all 0.1s;
+  display: inline-block;
+  text-decoration: none;
+  image-rendering: pixelated;
+}
+
+.btn-pixel:active {
+  transform: translate(2px, 2px);
+  box-shadow: none !important;
+}
