@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getSkill, getRelatedSkills, domainEmoji, domainLabel } from "@/lib/api";
 import { notFound } from "next/navigation";
+import DownloadButton from "@/components/DownloadButton";
 
 export const revalidate = 60;
 
@@ -139,13 +140,8 @@ export default async function SkillDetailPage({ params }: { params: { slug: stri
           style={{ boxShadow: "4px 4px 0px #f59e0b40" }}>
           <p className="text-[9px] text-gray-400 mb-2">Compatible with OpenClaw · Claude · ChatGPT</p>
           <p className="text-[8px] text-gray-600 mb-5">{skill.num_principles} principles · semantic retrieval · knowledge graph</p>
-          <button
-            className="text-[10px] bg-amber-500 hover:bg-amber-400 text-black font-bold px-10 py-4 transition-all"
-            style={{ fontFamily: "'Press Start 2P', monospace", boxShadow: "3px 3px 0px #000" }}
-          >
-            DOWNLOAD FREE →
-          </button>
-          <p className="text-[8px] text-gray-600 mt-3">Free during beta · Sign in to track your skills</p>
+          <DownloadButton skillId={skill.skill_id} />
+          <p className="text-[8px] text-gray-600 mt-3">Free during beta · Sign in to save to dashboard</p>
         </div>
 
         {/* Related */}

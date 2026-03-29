@@ -52,8 +52,8 @@ export default async function HomePage() {
           </h1>
 
           <p className="text-sm text-gray-400 max-w-lg leading-relaxed">
-            Each skill is a <span className="text-amber-400">structured knowledge base</span> — principles, techniques, expert frameworks, and semantic search. Not just prompts.{" "}
-            <span className="text-gray-300">Your AI thinks like an expert.</span>
+            You ask <span className="text-white">"why is my sauce gluey?"</span> — your AI retrieves the exact principle, the science behind it, and a direct quote from the expert who figured it out.{" "}
+            <span className="text-amber-400">Not a prompt. A brain.</span>
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4">
@@ -81,18 +81,18 @@ export default async function HomePage() {
           {[
             {
               icon: "🧠",
-              title: "Deep Knowledge",
-              body: "Each skill contains hundreds of expert principles, techniques, and the reasoning behind them — extracted from the world's best practitioners.",
+              title: "The Why, Not Just the What",
+              body: "Every technique comes with the reasoning behind it. Not \"add cheese off heat\" — but why proteins seize above 85°C, and what that means for every sauce you'll ever make.",
             },
             {
               icon: "🔍",
-              title: "Semantic Search",
-              body: "Your AI retrieves the right knowledge for any situation. Ask a question, get expert-level context — not keyword matches.",
+              title: "Ask, Don't Search",
+              body: "\"Why is my crust soft?\" retrieves the exact principle, the expert quote that explains it, and three related techniques. Your AI finds the answer — you don't have to know what to look for.",
             },
             {
               icon: "🕸️",
-              title: "Knowledge Graph",
-              body: "Skills connect to each other. Related techniques, shared equipment, overlapping frameworks — your AI navigates a web of expertise.",
+              title: "Skills Talk to Each Other",
+              body: "Carbonara emulsification connects to Cacio e Pepe connects to French butter sauces. Load one skill, your AI inherits the whole neighbourhood of related expertise.",
             },
           ].map((item) => (
             <div
@@ -118,8 +118,8 @@ export default async function HomePage() {
           >
             <span className="text-2xl">🐚</span>
             <p className="text-xs text-gray-400 leading-relaxed">
-              <span className="text-white font-medium">Skills are not prompt files.</span>{" "}
-              They're structured databases of expert knowledge — principles with explanations, direct quotes, technique taxonomies, and interconnected concepts — all queryable by your AI in real time.
+              <span className="text-white font-medium">A prompt file tells your AI how to behave.</span>{" "}
+              A hermitcrab skill gives it actual knowledge to retrieve — like the difference between telling someone "be a doctor" and handing them a searchable medical textbook written by the best doctors alive.
             </p>
           </div>
         </div>
@@ -218,11 +218,11 @@ export default async function HomePage() {
           className="text-base md:text-xl text-white mb-4 leading-relaxed"
           style={{ fontFamily: "'Press Start 2P', monospace" }}
         >
-          Built by creators.{" "}
-          <span className="text-amber-400">Worn by AI.</span>
+          Know something.{" "}
+          <span className="text-amber-400">Sell the brain.</span>
         </h2>
         <p className="text-sm text-gray-400 mb-8 max-w-md mx-auto">
-          {totalSkills || 23} skills across {domains.length || 9} domains. More added every week.
+          If you're an expert in anything — cooking, SEO, finance, copywriting — your knowledge can become a skill other AIs load and use. Publish once. Earn every time.
         </p>
         <Link
           href="/sell"

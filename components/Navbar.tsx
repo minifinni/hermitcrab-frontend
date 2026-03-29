@@ -1,6 +1,25 @@
 import Link from "next/link";
+import { createClient } from "@/lib/supabase/server";
+import NavbarAuth from "./NavbarAuth";
 
-export default function Navbar() {
+export default async function Navbar() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  // Fetch profile for avatar
+  let profile = null;
+  if (user) {
+    const { data } = await supabase
+      .from("profiles")
+      .select("display_name, avatar_url")
+      .eq("id", user.id)
+      .single();
+    profile = data;
+  }
+
+  const avatarUrl = profile?.avatar_url || user?.user_metadata?.avatar_url;
+  const displayName = profile?.display_name || user?.email?.split("@")[0] || "User";
+
   return (
     <nav className="sticky top-0 z-50 border-b border-[#2a2d35] bg-[#0d0f14]/95 backdrop-blur-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -40,24 +59,12 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Auth buttons */}
-          <div className="flex items-center gap-3">
-            <button
-              className="text-[9px] text-gray-400 hover:text-white transition-colors px-3 py-1.5 border border-transparent hover:border-[#2a2d35]"
-              style={{ fontFamily: "'Press Start 2P', monospace" }}
-            >
-              Login
-            </button>
-            <button
-              className="text-[9px] bg-amber-500 hover:bg-amber-400 text-black px-3 py-1.5 font-bold transition-colors"
-              style={{
-                fontFamily: "'Press Start 2P', monospace",
-                boxShadow: "2px 2px 0px #000",
-              }}
-            >
-              Sign Up
-            </button>
-          </div>
+          {/* Auth section — client component handles interactivity */}
+          <NavbarAuth
+            user={user ? { email: user.email, id: user.id } : null}
+            avatarUrl={avatarUrl}
+            displayName={displayName}
+          />
         </div>
       </div>
     </nav>
