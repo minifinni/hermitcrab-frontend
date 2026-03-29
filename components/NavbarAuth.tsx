@@ -22,7 +22,21 @@ export default function NavbarAuth({ user, avatarUrl, displayName }: NavbarAuthP
 
   if (user) {
     return (
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-4">
+        <Link
+          href="/dashboard"
+          className="text-[8px] text-gray-400 hover:text-amber-400 transition-colors"
+          style={{ fontFamily: "'Press Start 2P', monospace" }}
+        >
+          DASHBOARD
+        </Link>
+        <Link
+          href="/settings/api-keys"
+          className="text-[8px] text-gray-400 hover:text-amber-400 transition-colors"
+          style={{ fontFamily: "'Press Start 2P', monospace" }}
+        >
+          SETTINGS
+        </Link>
         <Link
           href="/dashboard"
           className="flex items-center gap-2 group"
@@ -44,12 +58,6 @@ export default function NavbarAuth({ user, avatarUrl, displayName }: NavbarAuthP
               </span>
             </div>
           )}
-          <span
-            className="text-[8px] text-gray-400 group-hover:text-amber-400 transition-colors hidden sm:block"
-            style={{ fontFamily: "'Press Start 2P', monospace" }}
-          >
-            DASHBOARD
-          </span>
         </Link>
         <button
           onClick={handleSignOut}

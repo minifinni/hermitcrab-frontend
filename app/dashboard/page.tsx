@@ -77,27 +77,21 @@ export default async function DashboardPage() {
             <p className="text-[8px] text-gray-500">{user.email}</p>
           </div>
 
-          <SignOutButton />
+          <div className="flex items-center gap-4">
+            <Link
+              href="/settings/api-keys"
+              className="text-[8px] text-gray-500 hover:text-amber-400 border border-[#2a2d35] hover:border-amber-400/50 px-3 py-2 transition-all"
+              style={{ fontFamily: "'Press Start 2P', monospace" }}
+            >
+              SETTINGS
+            </Link>
+            <SignOutButton />
+          </div>
         </div>
 
         {/* My Skills */}
         <div className="mb-8">
-          {/* API Keys shortcut */}
-        <Link
-          href="/dashboard/api-keys"
-          className="block bg-[#161920] border-2 border-amber-400/40 hover:border-amber-400 p-5 mb-6 transition-all group"
-          style={{ boxShadow: "2px 2px 0px #000" }}
-        >
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-[9px] text-amber-400" style={{ fontFamily: "'Press Start 2P', monospace" }}>API KEYS</p>
-              <p className="text-xs text-gray-400 mt-2">Generate a key to query hermitcrab from your agent or app</p>
-            </div>
-            <span className="text-amber-400 text-lg group-hover:translate-x-1 transition-transform">→</span>
-          </div>
-        </Link>
-
-        <h2
+          <h2
             className="text-[9px] text-white mb-4"
             style={{ fontFamily: "'Press Start 2P', monospace" }}
           >
