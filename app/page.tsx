@@ -163,7 +163,7 @@ export default async function HomePage() {
                 >
                   <div className="flex items-start justify-between">
                     <div className="w-10 h-10 border-2 border-amber-400/40 flex items-center justify-center bg-[#0d0f14] flex-shrink-0">
-                      <HermitSprite domain={pack.domain} size={32} />
+                      <HermitSprite domain={pack.domain} size={48} />
                     </div>
                     <span
                       className="text-[7px] text-amber-400 border border-amber-400/50 px-2 py-0.5"

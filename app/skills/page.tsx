@@ -139,7 +139,7 @@ export default function SkillsPage() {
                         {/* Header row */}
                         <div className="flex items-start gap-4">
                           <div className="w-12 h-12 border-2 border-amber-400/40 flex items-center justify-center bg-[#0d0f14] flex-shrink-0">
-                            <HermitSprite domain={creator.category} size={36} />
+                            <HermitSprite domain={creator.category} size={56} />
                           </div>
                           <div className="flex-1 min-w-0">
                             <p
@@ -235,7 +235,7 @@ export default function SkillsPage() {
                       {/* Header row */}
                       <div className="flex items-start gap-4">
                         <div className="w-12 h-12 border-2 border-gray-700 flex items-center justify-center bg-[#0d0f14] flex-shrink-0 grayscale opacity-50">
-                          <HermitSprite domain={creator.category} size={36} />
+                          <HermitSprite domain={creator.category} size={56} />
                         </div>
                         <div className="flex-1 min-w-0">
                           <p
