@@ -2,23 +2,9 @@
 
 import { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
-import { getCreators, ApiCreator } from "@/lib/api";
+import { getCreators, ApiCreator, domainEmoji } from "@/lib/api";
 
-function categoryEmoji(category: string) {
-  const map: Record<string, string> = {
-    cooking: "🍳",
-    food: "🍳",
-    business: "📊",
-    writing: "✍️",
-    coding: "💻",
-    sales: "📧",
-    seo: "🔍",
-    research: "🔬",
-    music: "🎵",
-    general: "⚡",
-  };
-  return map[category?.toLowerCase()] ?? "🐚";
-}
+const categoryEmoji = domainEmoji;
 
 export default function SkillsPage() {
   const [creators, setCreators] = useState<ApiCreator[]>([]);
