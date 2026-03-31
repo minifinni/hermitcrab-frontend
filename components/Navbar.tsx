@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import NavbarAuth from "./NavbarAuth";
+import NavLinks from "./NavLinks";
 
 export default async function Navbar() {
   const supabase = await createClient();
@@ -34,30 +35,8 @@ export default async function Navbar() {
             </span>
           </Link>
 
-          {/* Nav links */}
-          <div className="hidden md:flex items-center gap-8">
-            <Link
-              href="/packs"
-              className="text-xs text-amber-400 hover:text-amber-300 transition-colors"
-              style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "10px" }}
-            >
-              Packs
-            </Link>
-            <Link
-              href="/skills"
-              className="text-xs text-gray-400 hover:text-amber-400 transition-colors"
-              style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "10px" }}
-            >
-              Creators
-            </Link>
-            <Link
-              href="/sell"
-              className="text-xs text-gray-400 hover:text-amber-400 transition-colors"
-              style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "10px" }}
-            >
-              Sell Your Skill
-            </Link>
-          </div>
+          {/* Nav links — client component for active state */}
+          <NavLinks />
 
           {/* Auth section — client component handles interactivity */}
           <NavbarAuth
