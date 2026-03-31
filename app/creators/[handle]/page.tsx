@@ -19,16 +19,19 @@ function categoryEmoji(category: string) {
   return map[category?.toLowerCase()] ?? "🐚";
 }
 
-export default async function CreatorPage({ params }: { params: { handle: string } }) {
+export const dynamic = "force-dynamic";
+
+export default async function CreatorPage({ params }: { params: Promise<{ handle: string }> }) {
+  const { handle } = await params;
   let creator: any = null;
   let skills: any[] = [];
 
   try {
     const [creators, creatorSkills] = await Promise.all([
       getCreators(),
-      getSkillsByCreator(params.handle),
+      getSkillsByCreator(handle),
     ]);
-    creator = creators.find((c) => c.handle === params.handle);
+    creator = creators.find((c: any) => c.handle === handle);
     skills = creatorSkills;
   } catch {
     notFound();
