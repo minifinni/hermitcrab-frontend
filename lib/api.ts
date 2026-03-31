@@ -38,6 +38,9 @@ export interface ApiPrinciple {
   details: string;
   why: string;
   chef_quotes: string[];
+  attribution?: string;
+  confidence_score?: number;
+  prescription?: string;
 }
 
 export interface ApiSearchResult {
@@ -69,6 +72,49 @@ export async function getDomains(): Promise<{ domain: string; count: number }[]>
 
 export async function getRelatedSkills(skillId: string): Promise<{ skill_id: string; title: string; domain: string; shared_techniques: number }[]> {
   return apiFetch(`/v1/skills/${skillId}/related`);
+}
+
+export interface ApiCreator {
+  handle: string;
+  name: string;
+  category: string;
+  status: "done" | "pending" | "processing";
+  video_count: number;
+  skill_count?: number;
+  progress_pct?: number;
+  videos_processed?: number;
+}
+
+export async function getCreators(category?: string): Promise<ApiCreator[]> {
+  const params = new URLSearchParams();
+  if (category) params.set("category", category);
+  const qs = params.toString() ? `?${params}` : "";
+  return apiFetch(`/v1/channels${qs}`);
+}
+
+// ── Packs ──
+
+export interface ApiPack {
+  pack_id: string;
+  name: string;
+  domain: string;
+  skill_count: number;
+  creator_name?: string;
+  creator_handle?: string;
+  description?: string;
+}
+
+export async function getPacks(): Promise<ApiPack[]> {
+  return apiFetch("/v1/packs");
+}
+
+export async function getPack(packId: string): Promise<ApiPack & { skills: ApiSkill[] }> {
+  return apiFetch(`/v1/packs/${packId}`);
+}
+
+export async function getSkillsByCreator(handle: string, page = 1, perPage = 50): Promise<ApiSkill[]> {
+  const params = new URLSearchParams({ channel: handle, page: String(page), per_page: String(perPage) });
+  return apiFetch(`/v1/skills?${params}`);
 }
 
 // Map API domain to emoji + display name

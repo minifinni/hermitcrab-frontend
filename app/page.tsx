@@ -1,16 +1,21 @@
 import Link from "next/link";
-import { getSkills, getDomains, domainLabel, DOMAIN_META } from "@/lib/api";
+import { getSkills, getDomains, getCreators, getPacks, domainLabel, DOMAIN_META } from "@/lib/api";
 
 export const revalidate = 60;
 
 export default async function HomePage() {
   let trendingSkills: any[] = [];
-  let domains: { domain: string; count: number }[] = [];
+  let creators: any[] = [];
+  let packs: any[] = [];
   let totalSkills = 0;
 
   try {
-    [trendingSkills, domains] = await Promise.all([getSkills(undefined, 1, 6), getDomains()]);
-    totalSkills = domains.reduce((sum, d) => sum + d.count, 0);
+    [trendingSkills, creators, packs] = await Promise.all([
+      getSkills(undefined, 1, 6),
+      getCreators(),
+      getPacks()
+    ]);
+    totalSkills = trendingSkills.length > 0 ? 50 : 0; // approximate until we have a count endpoint
   } catch {
     // fallback to empty — page still renders
   }
@@ -44,29 +49,29 @@ export default async function HomePage() {
             className="text-2xl md:text-3xl text-white leading-relaxed"
             style={{ fontFamily: "'Press Start 2P', monospace" }}
           >
-            Skills your AI{" "}
-            <span className="text-amber-400">can wear.</span>
+            Decisions{" "}
+            <span className="text-amber-400">with confidence.</span>
           </h1>
 
           <p className="text-sm text-gray-400 max-w-lg leading-relaxed">
-            Vector embeddings. Knowledge graphs. Semantic retrieval.{" "}
-            <span className="text-amber-400">Not a .md file.</span>
+            Not just information — expert opinions you can act on.{" "}
+            <span className="text-amber-400">Someone you trust already decided.</span>
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
-              href="/skills"
+              href="/packs"
               className="text-[10px] bg-amber-500 hover:bg-amber-400 text-black font-bold px-6 py-3 transition-all duration-100"
               style={{ fontFamily: "'Press Start 2P', monospace", boxShadow: "3px 3px 0px #000" }}
             >
-              Browse Skills
+              Browse Packs
             </Link>
             <Link
-              href="/sell"
+              href="/skills"
               className="text-[10px] text-amber-400 border-2 border-amber-400 hover:bg-amber-400 hover:text-black px-6 py-3 transition-all duration-100"
               style={{ fontFamily: "'Press Start 2P', monospace", boxShadow: "3px 3px 0px #000" }}
             >
-              Sell Your Skill
+              All Creators
             </Link>
           </div>
         </div>
@@ -77,16 +82,16 @@ export default async function HomePage() {
         <div className="max-w-5xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-3 gap-6">
           {[
             {
-              title: "The Why, Not Just the What",
-              body: "Every technique comes with the reasoning behind it. Not \"add cheese off heat\" — but why proteins seize above 85°C, and what that means for every sauce you'll ever make.",
+              title: "Decisions, Not Just Answers",
+              body: "Generic LLMs say 'it depends.' Experts say 'do this.' Get opinionated, prescriptive guidance — like 'Always move to AWS early' not 'consider your scale and budget...'",
             },
             {
-              title: "Ask, Don't Search",
-              body: "\"Why is my crust soft?\" retrieves the exact principle, the expert quote that explains it, and three related techniques. Your AI finds the answer — you don't have to know what to look for.",
+              title: "Accountability You Can Reference",
+              body: "\"According to Kenji...\" — know who decided. Social proof builds confidence. And if questioned, you can cite the expert. Someone you trust already made this call.",
             },
             {
-              title: "Skills Talk to Each Other",
-              body: "Carbonara emulsification connects to Cacio e Pepe connects to French butter sauces. Load one skill, your AI inherits the whole neighbourhood of related expertise.",
+              title: "What Would [Expert] Do?",
+              body: "Mental models, decision frameworks, specific prescriptions. Not generic advice — the exact heuristics experts use. Learn how Karpathy, Greg, or Babish actually think.",
             },
           ].map((item) => (
             <div
@@ -124,47 +129,120 @@ export default async function HomePage() {
             className="text-amber-400 text-[10px] tracking-wider"
             style={{ fontFamily: "'Press Start 2P', monospace" }}
           >
-            {totalSkills || 23} skills · {domains.length || 9} domains · Built by creators
+            {packs.length || 0} skill packs · {totalSkills || 50} expert opinions · {creators.length || 0} creators
           </p>
         </div>
       </section>
 
-      {/* ── Trending Skills ── */}
+      {/* ── Featured Packs ── */}
+      {packs.length > 0 && (
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
+          <div className="flex items-center justify-between mb-8">
+            <h2
+              className="text-sm text-white"
+              style={{ fontFamily: "'Press Start 2P', monospace" }}
+            >
+              FEATURED PACKS
+            </h2>
+            <Link
+              href="/packs"
+              className="text-[8px] text-amber-400 hover:text-amber-300 transition-colors"
+              style={{ fontFamily: "'Press Start 2P', monospace" }}
+            >
+              VIEW ALL →
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            {packs.slice(0, 4).map((pack) => (
+              <Link key={pack.pack_id} href={`/packs/${pack.pack_id}`}>
+                <div
+                  className="bg-[#161920] border-2 border-[#2a2d35] hover:border-amber-400 p-5 h-full transition-all duration-150 flex flex-col gap-3 cursor-pointer group"
+                  style={{ boxShadow: "2px 2px 0px #000" }}
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="w-10 h-10 border-2 border-amber-400/40 flex items-center justify-center text-xl bg-[#0d0f14] flex-shrink-0">
+                      {(() => {
+                        const emojiMap: Record<string, string> = {
+                          cooking: "🍳",
+                          business: "📊",
+                          writing: "✍️",
+                          coding: "💻",
+                          sales: "📧",
+                          seo: "🔍",
+                          research: "🔬",
+                          music: "🎵",
+                          general: "⚡",
+                        };
+                        return emojiMap[pack.domain?.toLowerCase()] ?? "🐚";
+                      })()}
+                    </div>
+                    <span
+                      className="text-[7px] text-amber-400 border border-amber-400/50 px-2 py-0.5"
+                      style={{ fontFamily: "'Press Start 2P', monospace" }}
+                    >
+                      PACK
+                    </span>
+                  </div>
+
+                  <p
+                    className="text-[9px] text-white leading-relaxed group-hover:text-amber-300 transition-colors line-clamp-2"
+                    style={{ fontFamily: "'Press Start 2P', monospace" }}
+                  >
+                    {pack.name}
+                  </p>
+
+                  <div className="mt-auto flex items-center justify-between pt-2 border-t border-[#2a2d35]">
+                    <span className="text-[8px] text-gray-500">
+                      {pack.skill_count} skill{pack.skill_count !== 1 ? 's' : ''}
+                    </span>
+                    <span className="text-[8px] text-gray-600">View →</span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* ── Trending Creators ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
         <h2
           className="text-sm text-white mb-8"
           style={{ fontFamily: "'Press Start 2P', monospace" }}
         >
-          TRENDING SKILLS
+          TRENDING CREATORS
         </h2>
 
         <div className="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory">
-          {trendingSkills.map((skill) => (
-            <div key={skill.skill_id} className="min-w-[240px] max-w-[240px] snap-start flex-shrink-0">
-              <Link href={`/skills/${skill.skill_id}`} className="block h-full">
+          {creators.slice(0, 8).map((creator) => (
+            <div key={creator.handle} className="min-w-[240px] max-w-[240px] snap-start flex-shrink-0">
+              <Link href={`/creators/${creator.handle}`} className="block h-full">
                 <div
                   className="bg-[#161920] border-2 border-[#2a2d35] hover:border-amber-400 p-4 h-full transition-all duration-150 flex flex-col gap-3"
                   style={{ boxShadow: "2px 2px 0px #000" }}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-[8px] text-gray-500 uppercase tracking-widest">{skill.domain}</span>
+                    <span className="text-[8px] text-gray-500 uppercase tracking-widest">{creator.category}</span>
                     <span className="text-[8px] text-amber-400 border border-amber-400/50 px-2 py-0.5"
                       style={{ fontFamily: "'Press Start 2P', monospace" }}>
-                      FREE
+                      CREATOR
                     </span>
                   </div>
                   <div>
                     <p className="text-[9px] text-white leading-relaxed line-clamp-2"
                       style={{ fontFamily: "'Press Start 2P', monospace" }}>
-                      {skill.title}
+                      {creator.name}
                     </p>
-                    {skill.chef && (
-                      <p className="text-[8px] text-gray-500 mt-1">@{skill.chef.toLowerCase().replace(/\s+/g, '')}</p>
+                    {creator.top_skill && (
+                      <p className="text-[8px] text-amber-400/80 mt-2 font-medium">
+                        {creator.top_skill}
+                      </p>
                     )}
                   </div>
                   <div className="mt-auto flex items-center justify-between">
-                    <span className="text-[8px] text-gray-500">{skill.num_principles} principles</span>
-                    <span className="text-[8px] text-gray-600">{skill.techniques?.length || 0} techniques</span>
+                    <span className="text-[8px] text-gray-500">{creator.skill_count || 1} skill{(creator.skill_count || 1) > 1 ? 's' : ''}</span>
+                    <span className="text-[8px] text-gray-600">View →</span>
                   </div>
                 </div>
               </Link>
@@ -173,31 +251,60 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── Domains ── */}
+      {/* ── Creators ── */}
       <section className="bg-[#161920]/50 border-y border-[#2a2d35] py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2
-            className="text-sm text-white mb-8 text-center"
-            style={{ fontFamily: "'Press Start 2P', monospace" }}
-          >
-            BROWSE BY DOMAIN
-          </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto">
-            {(domains.length > 0 ? domains : Object.keys(DOMAIN_META).map(k => ({ domain: k, count: 0 }))).map((d) => (
-              <Link
-                key={d.domain}
-                href={`/skills?domain=${d.domain}`}
-                className="flex items-center justify-between bg-[#161920] border-2 border-[#2a2d35] hover:border-amber-400 px-4 py-3 transition-all group"
-                style={{ boxShadow: "2px 2px 0px #000" }}
-              >
-                <span className="text-[9px] text-gray-400 group-hover:text-amber-400 transition-colors uppercase"
-                  style={{ fontFamily: "'Press Start 2P', monospace" }}>
-                  {domainLabel(d.domain)}
-                </span>
-                {d.count > 0 && <span className="text-[7px] text-gray-600">{d.count}</span>}
-              </Link>
-            ))}
+          <div className="flex items-center justify-between mb-8">
+            <h2
+              className="text-sm text-white"
+              style={{ fontFamily: "'Press Start 2P', monospace" }}
+            >
+              BROWSE BY CREATOR
+            </h2>
+            <Link
+              href="/skills"
+              className="text-[8px] text-amber-400 hover:text-amber-300 transition-colors"
+              style={{ fontFamily: "'Press Start 2P', monospace" }}
+            >
+              VIEW ALL →
+            </Link>
           </div>
+          {creators.length > 0 ? (
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+              {creators.slice(0, 8).map((c: any) => (
+                <Link
+                  key={c.handle}
+                  href={`/creators/${c.handle}`}
+                  className="flex flex-col gap-2 bg-[#161920] border-2 border-[#2a2d35] hover:border-amber-400 px-4 py-4 transition-all group"
+                  style={{ boxShadow: "2px 2px 0px #000" }}
+                >
+                  <span
+                    className="text-[9px] text-gray-300 group-hover:text-amber-400 transition-colors truncate"
+                    style={{ fontFamily: "'Press Start 2P', monospace" }}
+                  >
+                    {c.name}
+                  </span>
+                  <span className="text-[7px] text-gray-600 uppercase tracking-widest">{c.category}</span>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto">
+              {Object.keys(DOMAIN_META).slice(0, 8).map((k) => (
+                <Link
+                  key={k}
+                  href={`/skills?domain=${k}`}
+                  className="flex items-center justify-between bg-[#161920] border-2 border-[#2a2d35] hover:border-amber-400 px-4 py-3 transition-all group"
+                  style={{ boxShadow: "2px 2px 0px #000" }}
+                >
+                  <span className="text-[9px] text-gray-400 group-hover:text-amber-400 transition-colors uppercase"
+                    style={{ fontFamily: "'Press Start 2P', monospace" }}>
+                    {domainLabel(k)}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

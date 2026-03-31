@@ -94,13 +94,38 @@ export default async function SkillDetailPage({ params }: { params: { slug: stri
                   {p.category && (
                     <span className="text-[7px] text-amber-600 uppercase tracking-widest">{p.category}</span>
                   )}
+                  
+                  {/* Attribution */}
+                  {p.attribution && (
+                    <p className="text-[8px] text-amber-400/70 mt-1 italic">{p.attribution}</p>
+                  )}
+                  
                   <p className="text-[9px] text-white mt-1" style={{ fontFamily: "'Press Start 2P', monospace" }}>
                     {p.principle}
                   </p>
+                  
+                  {/* Prescription - The Actionable Take */}
+                  {p.prescription && (
+                    <div className="mt-2 bg-amber-400/10 border border-amber-400/20 p-2 rounded">
+                      <p className="text-[8px] text-amber-400 uppercase tracking-widest mb-1">Do this:</p>
+                      <p className="text-[11px] text-gray-200 leading-relaxed">{p.prescription}</p>
+                    </div>
+                  )}
+                  
                   {p.details && <p className="text-[11px] text-gray-400 mt-1 leading-relaxed">{p.details}</p>}
                   {p.why && <p className="text-[11px] text-gray-500 mt-1 italic leading-relaxed">Why: {p.why}</p>}
                   {p.chef_quotes?.length > 0 && (
                     <p className="text-[11px] text-amber-300/70 mt-2 italic">"{p.chef_quotes[0]}"</p>
+                  )}
+                  
+                  {/* Confidence Score */}
+                  {p.confidence_score && p.confidence_score >= 4 && (
+                    <div className="mt-2 flex items-center gap-1">
+                      <span className="text-[8px] text-gray-500">Opinion strength:</span>
+                      <span className="text-[8px] text-amber-400">
+                        {"★".repeat(p.confidence_score)}{"☆".repeat(5 - p.confidence_score)}
+                      </span>
+                    </div>
                   )}
                 </div>
               ))}

@@ -37,14 +37,14 @@ export default async function Navbar() {
           {/* Nav links */}
           <div className="hidden md:flex items-center gap-8">
             <Link
-              href="/skills"
-              className="text-xs text-gray-400 hover:text-amber-400 transition-colors"
+              href="/packs"
+              className="text-xs text-amber-400 hover:text-amber-300 transition-colors"
               style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "10px" }}
             >
-              Browse
+              Packs
             </Link>
             <Link
-              href="/creators"
+              href="/skills"
               className="text-xs text-gray-400 hover:text-amber-400 transition-colors"
               style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "10px" }}
             >
