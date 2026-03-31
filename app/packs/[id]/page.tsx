@@ -112,7 +112,7 @@ export default async function PackDetailPage({ params }: { params: Promise<{ id:
                   {/* Header */}
                   <div className="flex items-center justify-between">
                     <span className="text-[7px] text-gray-500 uppercase tracking-widest border border-[#2a2d35] px-2 py-0.5">
-                      {domainEmoji(skill.domain)} {domainLabel(skill.domain)}
+                      <HermitSprite domain={skill.domain} size={14} /> {domainLabel(skill.domain)}
                     </span>
                     <span
                       className="text-[8px] text-amber-400 border border-amber-400/50 px-2 py-0.5"
