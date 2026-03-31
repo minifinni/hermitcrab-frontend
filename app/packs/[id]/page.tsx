@@ -4,23 +4,15 @@ import { notFound } from "next/navigation";
 
 export const revalidate = 60;
 
-// Generate static params for all packs
-export async function generateStaticParams() {
-  try {
-    const packs = await getPacks();
-    return packs.map((pack) => ({
-      id: pack.pack_id,
-    }));
-  } catch {
-    return [];
-  }
-}
+// Dynamic rendering — don't pre-generate, fetch on demand
+export const dynamic = "force-dynamic";
 
-export default async function PackDetailPage({ params }: { params: { id: string } }) {
+export default async function PackDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   let pack: any = null;
 
   try {
-    pack = await getPack(params.id);
+    pack = await getPack(id);
   } catch {
     notFound();
   }
