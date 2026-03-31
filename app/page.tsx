@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getSkills, getDomains, getCreators, getPacks, domainLabel, domainEmoji, DOMAIN_META } from "@/lib/api";
+import HermitSprite from "@/components/HermitSprite";
 
 export const revalidate = 60;
 
@@ -161,8 +162,8 @@ export default async function HomePage() {
                   style={{ boxShadow: "2px 2px 0px #000" }}
                 >
                   <div className="flex items-start justify-between">
-                    <div className="w-10 h-10 border-2 border-amber-400/40 flex items-center justify-center text-xl bg-[#0d0f14] flex-shrink-0">
-                      {domainEmoji(pack.domain)}
+                    <div className="w-10 h-10 border-2 border-amber-400/40 flex items-center justify-center bg-[#0d0f14] flex-shrink-0">
+                      <HermitSprite domain={pack.domain} size={32} />
                     </div>
                     <span
                       className="text-[7px] text-amber-400 border border-amber-400/50 px-2 py-0.5"
