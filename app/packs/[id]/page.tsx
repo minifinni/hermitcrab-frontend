@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getPack, getPacks, domainEmoji, domainLabel } from "@/lib/api";
 import { notFound } from "next/navigation";
+import HermitSprite from "@/components/HermitSprite";
 
 export const revalidate = 60;
 
@@ -38,8 +39,8 @@ export default async function PackDetailPage({ params }: { params: Promise<{ id:
           className="bg-[#161920] border-2 border-[#2a2d35] p-8 mb-10 flex flex-col sm:flex-row items-start gap-6"
           style={{ boxShadow: "3px 3px 0px #000" }}
         >
-          <div className="w-20 h-20 border-2 border-amber-400/40 flex items-center justify-center text-4xl bg-[#0d0f14] flex-shrink-0">
-            {domainEmoji(pack.domain)}
+          <div className="w-20 h-20 border-2 border-amber-400/40 flex items-center justify-center bg-[#0d0f14] flex-shrink-0">
+            <HermitSprite domain={pack.domain} size={56} />
           </div>
           <div className="flex-1">
             <div className="flex items-center gap-3 mb-2">
