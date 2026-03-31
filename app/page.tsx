@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getSkills, getDomains, getCreators, getPacks, domainLabel, DOMAIN_META } from "@/lib/api";
+import { getSkills, getDomains, getCreators, getPacks, domainLabel, domainEmoji, DOMAIN_META } from "@/lib/api";
 
 export const revalidate = 60;
 
@@ -162,20 +162,7 @@ export default async function HomePage() {
                 >
                   <div className="flex items-start justify-between">
                     <div className="w-10 h-10 border-2 border-amber-400/40 flex items-center justify-center text-xl bg-[#0d0f14] flex-shrink-0">
-                      {(() => {
-                        const emojiMap: Record<string, string> = {
-                          cooking: "🍳",
-                          business: "📊",
-                          writing: "✍️",
-                          coding: "💻",
-                          sales: "📧",
-                          seo: "🔍",
-                          research: "🔬",
-                          music: "🎵",
-                          general: "⚡",
-                        };
-                        return emojiMap[pack.domain?.toLowerCase()] ?? "🐚";
-                      })()}
+                      {domainEmoji(pack.domain)}
                     </div>
                     <span
                       className="text-[7px] text-amber-400 border border-amber-400/50 px-2 py-0.5"

@@ -4,20 +4,7 @@ import { notFound } from "next/navigation";
 
 export const revalidate = 60;
 
-function categoryEmoji(category: string) {
-  const map: Record<string, string> = {
-    cooking: "🍳",
-    business: "📊",
-    writing: "✍️",
-    coding: "💻",
-    sales: "📧",
-    seo: "🔍",
-    research: "🔬",
-    music: "🎵",
-    general: "⚡",
-  };
-  return map[category?.toLowerCase()] ?? "🐚";
-}
+const categoryEmoji = domainEmoji;
 
 export const dynamic = "force-dynamic";
 
