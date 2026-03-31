@@ -50,7 +50,7 @@ export default async function SkillDetailPage({ params }: { params: Promise<{ sl
           )}
           <div className="flex items-center gap-4 flex-wrap">
             <span className="text-[9px] text-amber-400 border border-amber-400/30 bg-amber-400/10 px-3 py-1">
-              <HermitSprite domain={skill.domain} size={16} /> {domainLabel(skill.domain)}
+              <HermitSprite domain={skill.domain} size={22} /> {domainLabel(skill.domain)}
             </span>
             <span className="text-amber-400">★★★★☆</span>
             <span className="text-[8px] text-gray-500">{skill.num_principles} principles</span>
@@ -184,7 +184,7 @@ export default async function SkillDetailPage({ params }: { params: Promise<{ sl
                 <Link key={r.skill_id} href={`/skills/${r.skill_id}`}>
                   <div className="bg-[#161920] border-2 border-[#2a2d35] hover:border-amber-400 p-4 transition-all"
                     style={{ boxShadow: "2px 2px 0px #000" }}>
-                    <HermitSprite domain={r.domain} size={32} />
+                    <HermitSprite domain={r.domain} size={48} />
                     <p className="text-[8px] text-white mt-2 leading-relaxed line-clamp-2"
                       style={{ fontFamily: "'Press Start 2P', monospace" }}>
                       {r.title}

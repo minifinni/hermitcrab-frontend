@@ -44,7 +44,7 @@ export default async function CreatorPage({ params }: { params: Promise<{ handle
           style={{ boxShadow: "3px 3px 0px #000" }}
         >
           <div className="w-16 h-16 border-2 border-amber-400/40 flex items-center justify-center bg-[#0d0f14] flex-shrink-0">
-            <HermitSprite domain={creator.category} size={48} />
+            <HermitSprite domain={creator.category} size={56} />
           </div>
           <div className="flex-1">
             <h1
@@ -73,7 +73,7 @@ export default async function CreatorPage({ params }: { params: Promise<{ handle
                 className="text-[8px] text-gray-400 border border-[#2a2d35] bg-[#161920] px-3 py-1 flex items-center gap-1"
                 style={{ fontFamily: "'Press Start 2P', monospace" }}
               >
-                <HermitSprite domain={d} size={14} /> {domainLabel(d)}
+                <HermitSprite domain={d} size={20} /> {domainLabel(d)}
               </span>
             ))}
           </div>
@@ -101,7 +101,7 @@ export default async function CreatorPage({ params }: { params: Promise<{ handle
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-[7px] text-gray-500 uppercase tracking-widest border border-[#2a2d35] px-2 py-0.5 flex items-center gap-1">
-                      <HermitSprite domain={skill.domain} size={14} /> {domainLabel(skill.domain)}
+                      <HermitSprite domain={skill.domain} size={20} /> {domainLabel(skill.domain)}
                     </span>
                     <span
                       className="text-[8px] text-amber-400 border border-amber-400/50 px-2 py-0.5"

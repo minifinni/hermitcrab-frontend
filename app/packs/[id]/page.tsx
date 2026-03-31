@@ -40,7 +40,7 @@ export default async function PackDetailPage({ params }: { params: Promise<{ id:
           style={{ boxShadow: "3px 3px 0px #000" }}
         >
           <div className="w-20 h-20 border-2 border-amber-400/40 flex items-center justify-center bg-[#0d0f14] flex-shrink-0">
-            <HermitSprite domain={pack.domain} size={56} />
+            <HermitSprite domain={pack.domain} size={72} />
           </div>
           <div className="flex-1">
             <div className="flex items-center gap-3 mb-2">
@@ -112,7 +112,7 @@ export default async function PackDetailPage({ params }: { params: Promise<{ id:
                   {/* Header */}
                   <div className="flex items-center justify-between">
                     <span className="text-[7px] text-gray-500 uppercase tracking-widest border border-[#2a2d35] px-2 py-0.5">
-                      <HermitSprite domain={skill.domain} size={14} /> {domainLabel(skill.domain)}
+                      <HermitSprite domain={skill.domain} size={20} /> {domainLabel(skill.domain)}
                     </span>
                     <span
                       className="text-[8px] text-amber-400 border border-amber-400/50 px-2 py-0.5"
