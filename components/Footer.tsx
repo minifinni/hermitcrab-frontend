@@ -10,10 +10,11 @@ export default function Footer() {
             <Image
               src="/hermitcrab-sprite.png"
               alt="Hermitcrab"
-              width={48}
-              height={48}
+              width={64}
+              height={56}
               className="pixelated"
               style={{ imageRendering: "pixelated" }}
+              unoptimized
             />
             <div>
               <span
@@ -48,7 +49,7 @@ export default function Footer() {
 
         <div className="mt-8 pt-6 border-t border-[#2a2d35] text-center">
           <p className="text-[9px] text-gray-700" style={{ fontFamily: "'Press Start 2P', monospace" }}>
-            © 2025 HERMITCRAB · Built with ⚙️ by Clank
+            © 2026 HERMITCRAB · Built with ⚙️ by Clank
           </p>
         </div>
       </div>
