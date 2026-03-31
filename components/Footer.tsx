@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
@@ -5,14 +6,24 @@ export default function Footer() {
     <footer className="border-t border-[#2a2d35] bg-[#0d0f14] mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <span
-              className="text-amber-400 text-xs"
-              style={{ fontFamily: "'Press Start 2P', monospace" }}
-            >
-              HERMITCRAB
-            </span>
-            <p className="text-xs text-gray-600 mt-2">Skills your AI can wear.</p>
+          <div className="flex items-center gap-4">
+            <Image
+              src="/hermitcrab-sprite.png"
+              alt="Hermitcrab"
+              width={48}
+              height={48}
+              className="pixelated"
+              style={{ imageRendering: "pixelated" }}
+            />
+            <div>
+              <span
+                className="text-amber-400 text-xs"
+                style={{ fontFamily: "'Press Start 2P', monospace" }}
+              >
+                HERMITCRAB
+              </span>
+              <p className="text-xs text-gray-600 mt-2">Skills your AI can wear.</p>
+            </div>
           </div>
 
           <div className="flex items-center gap-8">
