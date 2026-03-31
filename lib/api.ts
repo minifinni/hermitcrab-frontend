@@ -104,12 +104,26 @@ export interface ApiPack {
   description?: string;
 }
 
+// Backend returns title/num_skills/creator — map to frontend interface
+function mapPack(raw: any): ApiPack {
+  return {
+    pack_id: raw.pack_id,
+    name: raw.title || raw.name || "Untitled Pack",
+    domain: raw.domain,
+    skill_count: raw.num_skills ?? raw.skill_count ?? 0,
+    creator_name: raw.creator ?? raw.creator_name,
+    description: raw.description,
+  };
+}
+
 export async function getPacks(): Promise<ApiPack[]> {
-  return apiFetch("/v1/packs");
+  const raw = await apiFetch("/v1/packs");
+  return raw.map(mapPack);
 }
 
 export async function getPack(packId: string): Promise<ApiPack & { skills: ApiSkill[] }> {
-  return apiFetch(`/v1/packs/${packId}`);
+  const raw = await apiFetch(`/v1/packs/${packId}`);
+  return { ...mapPack(raw), skills: raw.skills || [] };
 }
 
 export async function getSkillsByCreator(handle: string, page = 1, perPage = 50): Promise<ApiSkill[]> {
@@ -119,15 +133,30 @@ export async function getSkillsByCreator(handle: string, page = 1, perPage = 50)
 
 // Map API domain to emoji + display name
 export const DOMAIN_META: Record<string, { emoji: string; label: string }> = {
-  cooking:    { emoji: "🍳", label: "Cooking" },
-  business:   { emoji: "📊", label: "Business" },
-  writing:    { emoji: "✍️", label: "Writing" },
-  coding:     { emoji: "💻", label: "Development" },
-  sales:      { emoji: "📧", label: "Sales" },
-  seo:        { emoji: "🔍", label: "SEO" },
-  research:   { emoji: "🔬", label: "Research" },
-  music:      { emoji: "🎵", label: "Music" },
-  general:    { emoji: "⚡", label: "General" },
+  cooking:      { emoji: "🍳", label: "Cooking" },
+  food:         { emoji: "🍽️", label: "Food" },
+  business:     { emoji: "📊", label: "Business" },
+  product:      { emoji: "🚀", label: "Product" },
+  ai:           { emoji: "🤖", label: "AI" },
+  tech:         { emoji: "💡", label: "Tech" },
+  dev:          { emoji: "💻", label: "Development" },
+  coding:       { emoji: "💻", label: "Development" },
+  finance:      { emoji: "💰", label: "Finance" },
+  fitness:      { emoji: "💪", label: "Fitness" },
+  health:       { emoji: "🧬", label: "Health" },
+  biotech:      { emoji: "🔬", label: "Biotech" },
+  marketing:    { emoji: "📣", label: "Marketing" },
+  copywriting:  { emoji: "✍️", label: "Copywriting" },
+  seo:          { emoji: "🔍", label: "SEO" },
+  design:       { emoji: "🎨", label: "Design" },
+  realestate:   { emoji: "🏠", label: "Real Estate" },
+  writing:      { emoji: "✍️", label: "Writing" },
+  productivity: { emoji: "⏱️", label: "Productivity" },
+  career:       { emoji: "🎯", label: "Career" },
+  sales:        { emoji: "📧", label: "Sales" },
+  research:     { emoji: "🔬", label: "Research" },
+  music:        { emoji: "🎵", label: "Music" },
+  general:      { emoji: "⚡", label: "General" },
 };
 
 export function domainEmoji(domain: string) {
