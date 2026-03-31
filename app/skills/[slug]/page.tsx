@@ -5,14 +5,17 @@ import DownloadButton from "@/components/DownloadButton";
 
 export const revalidate = 60;
 
-export default async function SkillDetailPage({ params }: { params: { slug: string } }) {
+export const dynamic = "force-dynamic";
+
+export default async function SkillDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   let skill: any;
   let related: any[] = [];
 
   try {
     [skill, related] = await Promise.all([
-      getSkill(params.slug),
-      getRelatedSkills(params.slug).catch(() => []),
+      getSkill(slug),
+      getRelatedSkills(slug).catch(() => []),
     ]);
   } catch {
     notFound();
