@@ -8,11 +8,10 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4">
             <Image
-              src="/hermitcrab-sprite.png"
+              src="/sprites/hermit_walk.gif"
               alt="Hermitcrab"
-              width={64}
-              height={56}
-              className="pixelated"
+              width={80}
+              height={80}
               style={{ imageRendering: "pixelated" }}
               unoptimized
             />
