@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
@@ -103,11 +104,20 @@ export default async function DashboardPage() {
               className="bg-[#161920] border-2 border-[#2a2d35] p-8 text-center"
               style={{ boxShadow: '2px 2px 0px #000' }}
             >
+              <Image
+                src="/sprites/hermit_walk.gif"
+                alt="Hermitcrab walking"
+                width={96}
+                height={96}
+                style={{ imageRendering: "pixelated" }}
+                unoptimized
+                className="mx-auto mb-4"
+              />
               <p
                 className="text-[8px] text-gray-500 mb-4 leading-loose"
                 style={{ fontFamily: "'Press Start 2P', monospace" }}
               >
-                No skills yet. Start downloading!
+                No skills yet. Start browsing!
               </p>
               <Link
                 href="/skills"
