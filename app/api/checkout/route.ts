@@ -20,10 +20,14 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Invalid request body' }, { status: 400 })
   }
 
-  const { skill_id, price_cents } = body
-  if (!skill_id || !price_cents) {
-    return NextResponse.json({ error: 'skill_id and price_cents are required' }, { status: 400 })
+  const { skill_id } = body
+  if (!skill_id) {
+    return NextResponse.json({ error: 'skill_id is required' }, { status: 400 })
   }
+
+  // Price is server-side only — never trust client-submitted prices
+  // All skills are free during beta. When pricing is added, look up from DB.
+  const price_cents = 0
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://hermitcrab.app'
 
