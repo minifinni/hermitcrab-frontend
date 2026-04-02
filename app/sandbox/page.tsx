@@ -44,7 +44,8 @@ export default function SandboxPage() {
 
   // Load packs and saved sandboxes
   useEffect(() => {
-    getPacks().then((p) => {
+    // Fetch via server-side proxy to avoid exposing API key in browser
+    fetch("/api/packs").then(r => r.json()).then((p: ApiPack[]) => {
       setPacks(p);
       const initialCrabs = p.map((pack, i) => {
         const { vx, vy } = randomVelocity();
@@ -61,7 +62,7 @@ export default function SandboxPage() {
         };
       });
       setCrabs(initialCrabs);
-    }).catch(() => {});
+    }).catch((e) => { console.error("Failed to load packs:", e); });
 
     // Load sandboxes from localStorage
     const saved = localStorage.getItem("hermitcrab-sandboxes");
@@ -331,17 +332,19 @@ export default function SandboxPage() {
               {/* Tooltip */}
               {hoveredCrab === crab.id && (
                 <div
-                  className="absolute -top-16 left-1/2 -translate-x-1/2 bg-[#161920] border border-amber-400/50 px-3 py-2 whitespace-nowrap z-50 pointer-events-none"
+                  className="absolute -top-16 left-1/2 bg-[#161920] border border-amber-400/50 px-3 py-2 whitespace-nowrap z-50 pointer-events-none"
                   style={{
                     fontFamily: "'Press Start 2P', monospace",
                     transform: `scaleX(${crab.facing === "left" ? -1 : 1}) translateX(-50%)`,
                     boxShadow: "2px 2px 0px #000",
                   }}
                 >
-                  <p className="text-[7px] text-amber-400">{crab.pack.name}</p>
-                  <p className="text-[6px] text-gray-500 mt-1">
-                    {crab.pack.skill_count} skills · {domainLabel(crab.pack.domain)}
-                  </p>
+                  <div style={{ transform: `scaleX(${crab.facing === "left" ? -1 : 1})` }}>
+                    <p className="text-[7px] text-amber-400">{crab.pack.name}</p>
+                    <p className="text-[6px] text-gray-500 mt-1">
+                      {crab.pack.skill_count} skills · {domainLabel(crab.pack.domain)}
+                    </p>
+                  </div>
                   {currentSandbox && (
                     <button
                       onClick={(e) => {
