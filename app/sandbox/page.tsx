@@ -41,8 +41,8 @@ function randomVelocity() {
   return { vx: Math.cos(angle) * SPEED, vy: Math.sin(angle) * SPEED };
 }
 
-function crabSize(skillCount: number) {
-  return Math.min(96, Math.max(36, 28 + Math.sqrt(skillCount || 0) * 8));
+function crabSize(_skillCount: number) {
+  return 56; // All crabs same size
 }
 
 function saveSandboxes(sandboxes: Sandbox[]) {
@@ -349,60 +349,24 @@ export default function SandboxPage() {
             style={{
               height: "560px",
               boxShadow: "3px 3px 0px #000",
-              background: `
-                linear-gradient(
-                  to bottom,
-                  #0a0c10 0%,
-                  #0a0c10 72%,
-                  #111418 74%,
-                  #13161c 100%
-                )
-              `,
-              backgroundSize: "100% 100%",
+              background: "#0a0c10",
             }}
           >
-            {/* Dot grid on upper area */}
+            {/* Dot grid */}
             <div
               className="absolute inset-0"
               style={{
                 backgroundImage:
                   "radial-gradient(circle at 1px 1px, #1a1d25 1px, transparent 0)",
                 backgroundSize: "24px 24px",
-                bottom: `${GROUND_HEIGHT}px`,
               }}
             />
 
-            {/* Ground terrain */}
-            <div
-              className="absolute left-0 right-0 bottom-0"
-              style={{
-                height: `${GROUND_HEIGHT}px`,
-                background: `
-                  repeating-linear-gradient(
-                    90deg,
-                    transparent,
-                    transparent 11px,
-                    #1a1d2508 11px,
-                    #1a1d2508 12px
-                  ),
-                  linear-gradient(
-                    to bottom,
-                    #15181e 0%,
-                    #111418 40%,
-                    #0e1015 100%
-                  )
-                `,
-                borderTop: "1px solid #2a2d3540",
-              }}
-            />
-
-            {/* Ground detail line */}
+            {/* Simple ground line */}
             <div
               className="absolute left-0 right-0"
-              style={{ bottom: `${GROUND_HEIGHT}px`, height: "2px" }}
-            >
-              <div className="w-full h-full bg-gradient-to-r from-transparent via-[#2a2d3560] to-transparent" />
-            </div>
+              style={{ bottom: `${GROUND_HEIGHT}px`, height: "1px", background: "#2a2d3560" }}
+            />
 
             {/* ── Crabs ── */}
             {visibleCrabs.map((crab) => {
@@ -471,32 +435,34 @@ export default function SandboxPage() {
                     </span>
                   </div>
 
-                  {/* Tooltip */}
-                  {isHovered && (
-                    <div
-                      className="absolute left-1/2 bg-[#161920] border border-amber-400/50 px-3 py-2 whitespace-nowrap z-50 pointer-events-none"
-                      style={{
-                        top: `-${crab.size < 50 ? 52 : 58}px`,
-                        transform: `scaleX(${facingLeft ? -1 : 1}) translateX(-50%)`,
-                        boxShadow: "2px 2px 0px #000",
-                      }}
-                    >
-                      <p className="text-[7px] text-amber-400" style={PIXEL_FONT}>
-                        {crab.pack.name}
-                      </p>
-                      <p className="text-[6px] text-gray-500 mt-1" style={PIXEL_FONT}>
-                        {crab.pack.skill_count} skills &middot; {domainLabel(crab.pack.domain)}
-                      </p>
-                      {crab.pack.creator_name && (
-                        <p className="text-[6px] text-gray-600 mt-0.5" style={PIXEL_FONT}>
-                          by {crab.pack.creator_name}
-                        </p>
-                      )}
-                    </div>
-                  )}
                 </div>
               );
             })}
+
+            {/* ── Tooltips (rendered at container level, not inside scaled crab divs) ── */}
+            {hoveredCrab && (() => {
+              const crab = visibleCrabs.find(c => c.id === hoveredCrab);
+              if (!crab) return null;
+              return (
+                <div
+                  className="absolute bg-[#161920] border border-amber-400/50 px-3 py-2 whitespace-nowrap pointer-events-none"
+                  style={{
+                    left: `${crab.x + crab.size / 2}px`,
+                    top: `${crab.y - 45}px`,
+                    transform: "translateX(-50%)",
+                    boxShadow: "2px 2px 0px #000",
+                    zIndex: 100,
+                  }}
+                >
+                  <p className="text-[7px] text-amber-400" style={PIXEL_FONT}>
+                    {crab.pack.name}
+                  </p>
+                  <p className="text-[6px] text-gray-500 mt-1" style={PIXEL_FONT}>
+                    {crab.pack.skill_count} skills &middot; {domainLabel(crab.pack.domain)}
+                  </p>
+                </div>
+              );
+            })()}
 
             {/* ── Empty state for project sandboxes ── */}
             {projectIsEmpty && (
@@ -731,11 +697,9 @@ export default function SandboxPage() {
 
         {/* Legend */}
         <div className="mt-4 flex flex-wrap gap-4 text-[7px] text-gray-600">
-          <span>Crab size = skill count (sqrt scale)</span>
-          <span>&middot;</span>
           <span>Click a crab to view their skill pack</span>
           <span>&middot;</span>
-          <span>Hover to pause &amp; inspect</span>
+          <span>Hover to inspect</span>
           <span>&middot;</span>
           <span>Create project sandboxes to curate your expert team</span>
         </div>
