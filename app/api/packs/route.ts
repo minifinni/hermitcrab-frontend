@@ -21,6 +21,7 @@ export async function GET() {
       skill_count: p.num_skills ?? p.skill_count ?? 0,
       creator_name: p.creator ?? p.creator_name,
       description: p.description,
+      pack_type: p.pack_type || (p.pack_id?.startsWith("TOPIC_") ? "topic" : "creator"),
     }));
     return NextResponse.json(mapped);
   } catch (e: any) {

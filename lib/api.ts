@@ -102,6 +102,7 @@ export interface ApiPack {
   creator_name?: string;
   creator_handle?: string;
   description?: string;
+  pack_type?: "creator" | "topic";
 }
 
 // Backend returns title/num_skills/creator — map to frontend interface
@@ -113,6 +114,7 @@ function mapPack(raw: any): ApiPack {
     skill_count: raw.num_skills ?? raw.skill_count ?? 0,
     creator_name: raw.creator ?? raw.creator_name,
     description: raw.description,
+    pack_type: raw.pack_type || (raw.pack_id?.startsWith("TOPIC_") ? "topic" : "creator"),
   };
 }
 
