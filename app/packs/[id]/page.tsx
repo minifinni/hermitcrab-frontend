@@ -1,26 +1,19 @@
 import Link from "next/link";
 import { getPack, getPacks, domainEmoji, domainLabel } from "@/lib/api";
 import { notFound } from "next/navigation";
+import HermitSprite from "@/components/HermitSprite";
 
 export const revalidate = 60;
 
-// Generate static params for all packs
-export async function generateStaticParams() {
-  try {
-    const packs = await getPacks();
-    return packs.map((pack) => ({
-      id: pack.pack_id,
-    }));
-  } catch {
-    return [];
-  }
-}
+// Dynamic rendering — don't pre-generate, fetch on demand
+export const dynamic = "force-dynamic";
 
-export default async function PackDetailPage({ params }: { params: { id: string } }) {
+export default async function PackDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   let pack: any = null;
 
   try {
-    pack = await getPack(params.id);
+    pack = await getPack(id);
   } catch {
     notFound();
   }
@@ -46,8 +39,8 @@ export default async function PackDetailPage({ params }: { params: { id: string 
           className="bg-[#161920] border-2 border-[#2a2d35] p-8 mb-10 flex flex-col sm:flex-row items-start gap-6"
           style={{ boxShadow: "3px 3px 0px #000" }}
         >
-          <div className="w-20 h-20 border-2 border-amber-400/40 flex items-center justify-center text-4xl bg-[#0d0f14] flex-shrink-0">
-            {domainEmoji(pack.domain)}
+          <div className="w-20 h-20 border-2 border-amber-400/40 flex items-center justify-center bg-[#0d0f14] flex-shrink-0">
+            <HermitSprite domain={pack.domain} size={72} />
           </div>
           <div className="flex-1">
             <div className="flex items-center gap-3 mb-2">
@@ -125,7 +118,7 @@ export default async function PackDetailPage({ params }: { params: { id: string 
                   {/* Header */}
                   <div className="flex items-center justify-between">
                     <span className="text-[7px] text-gray-500 uppercase tracking-widest border border-[#2a2d35] px-2 py-0.5">
-                      {domainEmoji(skill.domain)} {domainLabel(skill.domain)}
+                      <HermitSprite domain={skill.domain} size={20} /> {domainLabel(skill.domain)}
                     </span>
                     <span
                       className="text-[8px] text-amber-400 border border-amber-400/50 px-2 py-0.5"
