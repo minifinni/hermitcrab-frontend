@@ -102,14 +102,30 @@ export interface ApiPack {
   creator_name?: string;
   creator_handle?: string;
   description?: string;
+  pack_type?: "creator" | "topic";
+}
+
+// Backend returns title/num_skills/creator — map to frontend interface
+function mapPack(raw: any): ApiPack {
+  return {
+    pack_id: raw.pack_id,
+    name: raw.title || raw.name || "Untitled Pack",
+    domain: raw.domain,
+    skill_count: raw.num_skills ?? raw.skill_count ?? 0,
+    creator_name: raw.creator ?? raw.creator_name,
+    description: raw.description,
+    pack_type: raw.pack_type || (raw.pack_id?.startsWith("TOPIC_") ? "topic" : "creator"),
+  };
 }
 
 export async function getPacks(): Promise<ApiPack[]> {
-  return apiFetch("/v1/packs");
+  const raw = await apiFetch("/v1/packs");
+  return raw.map(mapPack);
 }
 
 export async function getPack(packId: string): Promise<ApiPack & { skills: ApiSkill[] }> {
-  return apiFetch(`/v1/packs/${packId}`);
+  const raw = await apiFetch(`/v1/packs/${packId}`);
+  return { ...mapPack(raw), skills: raw.skills || [] };
 }
 
 export async function getSkillsByCreator(handle: string, page = 1, perPage = 50): Promise<ApiSkill[]> {
@@ -118,17 +134,37 @@ export async function getSkillsByCreator(handle: string, page = 1, perPage = 50)
 }
 
 // Map API domain to emoji + display name
-export const DOMAIN_META: Record<string, { emoji: string; label: string }> = {
-  cooking:    { emoji: "🍳", label: "Cooking" },
-  business:   { emoji: "📊", label: "Business" },
-  writing:    { emoji: "✍️", label: "Writing" },
-  coding:     { emoji: "💻", label: "Development" },
-  sales:      { emoji: "📧", label: "Sales" },
-  seo:        { emoji: "🔍", label: "SEO" },
-  research:   { emoji: "🔬", label: "Research" },
-  music:      { emoji: "🎵", label: "Music" },
-  general:    { emoji: "⚡", label: "General" },
+export const DOMAIN_META: Record<string, { emoji: string; label: string; sprite?: string }> = {
+  cooking:      { emoji: "🍳", label: "Cooking", sprite: "/sprites/chef_hermit.png" },
+  food:         { emoji: "🍽️", label: "Food", sprite: "/sprites/chef_hermit.png" },
+  business:     { emoji: "📊", label: "Business", sprite: "/sprites/gold_hermit.png" },
+  product:      { emoji: "🚀", label: "Product", sprite: "/sprites/gold_hermit.png" },
+  ai:           { emoji: "🤖", label: "AI", sprite: "/sprites/ai_hermit.png" },
+  tech:         { emoji: "💡", label: "Tech", sprite: "/sprites/tech_hermit.png" },
+  dev:          { emoji: "💻", label: "Development", sprite: "/sprites/tech_hermit.png" },
+  coding:       { emoji: "💻", label: "Development", sprite: "/sprites/tech_hermit.png" },
+  finance:      { emoji: "💰", label: "Finance", sprite: "/sprites/gold_hermit.png" },
+  fitness:      { emoji: "💪", label: "Fitness", sprite: "/sprites/gym_hermit.png" },
+  health:       { emoji: "🧬", label: "Health", sprite: "/sprites/lab_hermit.png" },
+  biotech:      { emoji: "🔬", label: "Biotech", sprite: "/sprites/lab_hermit.png" },
+  marketing:    { emoji: "📣", label: "Marketing", sprite: "/sprites/marketing_hermit.png" },
+  copywriting:  { emoji: "✍️", label: "Copywriting", sprite: "/sprites/pink_hermit.png" },
+  seo:          { emoji: "🔍", label: "SEO", sprite: "/sprites/seo_hermit.png" },
+  design:       { emoji: "🎨", label: "Design", sprite: "/sprites/artist_hermit.png" },
+  realestate:   { emoji: "🏠", label: "Real Estate", sprite: "/sprites/gold_hermit.png" },
+  writing:      { emoji: "✍️", label: "Writing", sprite: "/sprites/pink_hermit.png" },
+  productivity: { emoji: "⏱️", label: "Productivity", sprite: "/sprites/blue_hermit.png" },
+  career:       { emoji: "🎯", label: "Career", sprite: "/sprites/gold_hermit.png" },
+  sales:        { emoji: "📧", label: "Sales", sprite: "/sprites/marketing_hermit.png" },
+  research:     { emoji: "🔬", label: "Research", sprite: "/sprites/lab_hermit.png" },
+  music:        { emoji: "🎵", label: "Music", sprite: "/sprites/artist_hermit.png" },
+  gardening:    { emoji: "🌱", label: "Gardening", sprite: "/sprites/gardening_hermit.png" },
+  general:      { emoji: "⚡", label: "General", sprite: "/sprites/gold_hermit.png" },
 };
+
+export function domainSprite(domain: string): string {
+  return DOMAIN_META[domain]?.sprite ?? "/sprites/gold_hermit.png";
+}
 
 export function domainEmoji(domain: string) {
   return DOMAIN_META[domain]?.emoji ?? "🐚";

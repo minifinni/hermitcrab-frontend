@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getPacks, domainEmoji, domainLabel } from "@/lib/api";
+import HermitSprite from "@/components/HermitSprite";
 
 export const revalidate = 60;
 
@@ -39,8 +40,8 @@ export default async function PacksPage() {
                 >
                   {/* Icon + Domain */}
                   <div className="flex items-start justify-between">
-                    <div className="w-14 h-14 border-2 border-amber-400/40 flex items-center justify-center text-3xl bg-[#0d0f14] flex-shrink-0">
-                      {domainEmoji(pack.domain)}
+                    <div className="w-20 h-20 border-2 border-amber-400/40 flex items-center justify-center bg-[#0d0f14] flex-shrink-0">
+                      <HermitSprite domain={pack.domain} size={64} />
                     </div>
                     <span
                       className="text-[8px] text-amber-400 border border-amber-400/50 px-2 py-0.5"
