@@ -21,10 +21,10 @@ export default async function PacksPage() {
             className="text-lg text-white mb-3"
             style={{ fontFamily: "'Press Start 2P', monospace" }}
           >
-            <span className="text-amber-400">▶</span> SKILL PACKS
+            <span className="text-amber-400">▶</span> BRAIN PACKS
           </h1>
           <p className="text-sm text-gray-400 max-w-xl">
-            Curated collections of expert skills. Each pack contains domain-specific knowledge from trusted creators.
+            Collections of related expert brains you can rent. Each pack bundles domain-specific expertise from trusted creators.
           </p>
         </div>
 
@@ -75,7 +75,7 @@ export default async function PacksPage() {
                   {/* Stats Footer */}
                   <div className="mt-auto pt-4 border-t border-[#2a2d35] flex items-center justify-between">
                     <span className="text-[8px] text-gray-500">
-                      {pack.skill_count} skill{pack.skill_count !== 1 ? 's' : ''}
+                      {pack.skill_count} brain{pack.skill_count !== 1 ? 's' : ''}
                     </span>
                     <span
                       className="text-[8px] text-amber-400 group-hover:text-amber-300 transition-colors"
@@ -108,7 +108,7 @@ export default async function PacksPage() {
                 NO PACKS FOUND
               </p>
               <p className="text-gray-600 text-xs mt-3">
-                Check back soon for new skill collections
+                Check back soon for new brain collections
               </p>
             </div>
           </div>

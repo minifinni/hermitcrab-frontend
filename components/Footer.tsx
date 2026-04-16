@@ -12,14 +12,14 @@ export default function Footer() {
             >
               HERMITCRAB
             </span>
-            <p className="text-xs text-gray-600 mt-2">Skills your AI can wear.</p>
+            <p className="text-xs text-gray-600 mt-2">Brains your AI can rent.</p>
           </div>
 
           <div className="flex items-center gap-8">
             {[
               ["Browse", "/skills"],
-              ["Sell", "/sell"],
-              ["Creators", "/creators"],
+              ["Rent", "/sell"],
+              ["Brains", "/creators"],
               ["Docs", "#"],
               ["Twitter", "#"],
             ].map(([label, href]) => (

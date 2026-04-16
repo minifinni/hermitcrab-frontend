@@ -48,14 +48,14 @@ export default async function Navbar() {
               className="text-xs text-gray-400 hover:text-amber-400 transition-colors"
               style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "10px" }}
             >
-              Creators
+              Brains
             </Link>
             <Link
               href="/sell"
               className="text-xs text-gray-400 hover:text-amber-400 transition-colors"
               style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "10px" }}
             >
-              Sell Your Skill
+              Rent Your Brain
             </Link>
           </div>
 

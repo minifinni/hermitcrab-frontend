@@ -91,7 +91,7 @@ export default function ApiKeysPage() {
         API KEYS
       </h2>
       <p className="text-xs text-gray-400 mb-8">
-        Use these keys to query hermitcrab from your agent or app.
+        Use these keys to access your rented brains from your agent or app.
       </p>
 
       {/* New key revealed */}

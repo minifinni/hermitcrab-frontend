@@ -1,26 +1,26 @@
-import { Upload, DollarSign, TrendingUp } from "lucide-react";
+import { Brain, Coins, Users } from "lucide-react";
 
 const STEPS = [
   {
-    icon: Upload,
+    icon: Brain,
     step: "01",
-    title: "Upload SKILL.md",
+    title: "Upload Your Brain",
     description:
-      "Write your skill in the standard SKILL.md format. Define what your AI does, how it behaves, and any required context. Drop it into the upload form.",
+      "Encode your expertise into a SKILL.md file. Document how you think, decide, and solve problems. Your brain's decision-making patterns become rentable intelligence.",
   },
   {
-    icon: DollarSign,
+    icon: Coins,
     step: "02",
-    title: "Set Your Price",
+    title: "Set Your Rental Rate",
     description:
-      "Choose Free, one-time paid, or subscription rental. You set the price. We take a small cut (15%) to keep the lights on. You keep the rest.",
+      "Choose how much to charge for temporary access to your brain. One-time consultation, hourly rental, or subscription. You keep 85% of every rental.",
   },
   {
-    icon: TrendingUp,
+    icon: Users,
     step: "03",
-    title: "Start Earning",
+    title: "Let Others Rent You",
     description:
-      "Your skill goes live on the marketplace. Every download or rental = revenue. Track analytics, update your skill, build your creator profile.",
+      "Your brain goes live on the marketplace. People don't download a skill—they temporarily hire YOUR decision-making. You earn while they think with your expertise.",
   },
 ];
 
@@ -41,12 +41,11 @@ export default function SellPage() {
           className="text-lg md:text-2xl text-white leading-relaxed mb-4"
           style={{ fontFamily: "'Press Start 2P', monospace" }}
         >
-          Publish Your{" "}
-          <span className="text-amber-400">Skill</span>
+          Rent Your{" "}
+          <span className="text-amber-400">Brain</span>
         </h1>
         <p className="text-sm text-gray-400 max-w-md mx-auto leading-relaxed">
-          Turn your AI expertise into passive income. Build once, sell forever.
-          The marketplace for agent skills is just getting started.
+          Turn your expertise into income without selling out. People rent temporary access to how you think—not a static product. Your brain, on-demand.
         </p>
       </div>
 
@@ -98,9 +97,9 @@ export default function SellPage() {
               fontFamily: "'Press Start 2P', monospace",
               boxShadow: "3px 3px 0px #000",
             }}
-            title="Coming soon — creator publishing is in development"
+            title="Coming soon — brain rental publishing is in development"
           >
-            Get Started
+            Upload Brain
           </button>
           {/* Coming soon tooltip */}
           <div className="absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
@@ -114,7 +113,7 @@ export default function SellPage() {
           </div>
         </div>
         <p className="text-xs text-gray-600 mt-4">
-          Creator publishing launching soon. Drop your email below to get early access.
+          Brain rental marketplace launching soon. Drop your email to get early access.
         </p>
 
         {/* Email capture */}
@@ -142,12 +141,12 @@ export default function SellPage() {
           className="text-[9px] text-gray-600 mb-4"
           style={{ fontFamily: "'Press Start 2P', monospace" }}
         >
-          89 creators already waiting
+          89 brains already waiting
         </p>
         <div className="flex justify-center gap-6">
           {[
-            ["247", "Skills listed"],
-            ["14.3k", "Downloads/week"],
+            ["247", "Brains available"],
+            ["14.3k", "Brain rentals/week"],
             ["85%", "Avg. 4★+"],
           ].map(([num, label]) => (
             <div key={label} className="text-center">

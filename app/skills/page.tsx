@@ -66,10 +66,10 @@ export default function SkillsPage() {
             className="text-lg text-white mb-2"
             style={{ fontFamily: "'Press Start 2P', monospace" }}
           >
-            <span className="text-amber-400">▶</span> ASK THE EXPERTS
+            <span className="text-amber-400">▶</span> RENT A BRAIN
           </h1>
           <p className="text-sm text-gray-400">
-            Someone you trust already decided. Get confidence to act, not just information.
+            Access an expert's decision-making engine. Rent their brain by the minute—get confidence to act, not just information.
           </p>
         </div>
 
@@ -204,7 +204,7 @@ export default function SkillsPage() {
                           <div className="flex items-center justify-between">
                             <div className="flex gap-3">
                               <span className="text-[8px] text-gray-500">
-                                {creator.skill_count || 0} skills
+                                {creator.skill_count || 0} brains
                               </span>
                               <span className="text-[8px] text-gray-500">
                                 {creator.video_count} sources
@@ -315,7 +315,7 @@ export default function SkillsPage() {
                   className="text-gray-500 text-[10px]"
                   style={{ fontFamily: "'Press Start 2P', monospace" }}
                 >
-                  NO CREATORS FOUND
+                  NO BRAINS FOUND
                 </p>
               </div>
             )}

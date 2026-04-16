@@ -24,7 +24,7 @@ export default async function SkillDetailPage({ params }: { params: { slug: stri
         {/* Back */}
         <Link href="/skills" className="text-[9px] text-gray-500 hover:text-amber-400 transition-colors mb-8 block"
           style={{ fontFamily: "'Press Start 2P', monospace" }}>
-          ← BACK TO SKILLS
+          ← ALL BRAINS
         </Link>
 
         {/* Hero */}
@@ -58,7 +58,7 @@ export default async function SkillDetailPage({ params }: { params: { slug: stri
           <div className="bg-[#161920] border-2 border-[#2a2d35] p-6 mb-6"
             style={{ boxShadow: "2px 2px 0px #000" }}>
             <h2 className="text-[9px] text-amber-400 mb-3" style={{ fontFamily: "'Press Start 2P', monospace" }}>
-              ABOUT THIS SKILL
+              ABOUT THIS BRAIN
             </h2>
             <p className="text-sm text-gray-300 leading-relaxed">{skill.context}</p>
           </div>
@@ -137,7 +137,7 @@ export default async function SkillDetailPage({ params }: { params: { slug: stri
         <div className="bg-[#161920] border-2 border-[#2a2d35] p-6 mb-6"
           style={{ boxShadow: "2px 2px 0px #000" }}>
           <h2 className="text-[9px] text-amber-400 mb-4" style={{ fontFamily: "'Press Start 2P', monospace" }}>
-            WHAT'S INSIDE
+            WHAT YOU GET
           </h2>
           <div className="grid grid-cols-3 gap-4 text-center">
             <div className="bg-[#0d0f14] border border-[#2a2d35] p-4">
@@ -156,24 +156,24 @@ export default async function SkillDetailPage({ params }: { params: { slug: stri
             </div>
           </div>
           <p className="text-[10px] text-gray-500 mt-4 leading-relaxed">
-            This is a structured knowledge base — not a prompt file. Your AI retrieves principles semantically, understands the reasoning behind each technique, and connects to related skills via a knowledge graph.
+            This brain captures how an expert actually thinks. Your AI retrieves their decision principles semantically and applies their reasoning to your situation.
           </p>
         </div>
 
-        {/* Download CTA */}
+        {/* Rent CTA */}
         <div className="bg-[#161920] border-2 border-amber-400 p-8 mb-6 text-center"
           style={{ boxShadow: "4px 4px 0px #f59e0b40" }}>
-          <p className="text-[9px] text-gray-400 mb-2">Compatible with OpenClaw · Claude · ChatGPT</p>
-          <p className="text-[8px] text-gray-600 mb-5">{skill.num_principles} principles · semantic retrieval · knowledge graph</p>
+          <p className="text-[9px] text-gray-400 mb-2">Rent this brain for your AI · OpenClaw · Claude · ChatGPT</p>
+          <p className="text-[8px] text-gray-600 mb-5">{skill.num_principles} principles · semantic retrieval · per-use pricing</p>
           <DownloadButton skillId={skill.skill_id} />
-          <p className="text-[8px] text-gray-600 mt-3">Free during beta · Sign in to save to dashboard</p>
+          <p className="text-[8px] text-gray-600 mt-3">Free during beta · Pay per use soon</p>
         </div>
 
         {/* Related */}
         {related.length > 0 && (
           <div>
             <h2 className="text-[9px] text-white mb-4" style={{ fontFamily: "'Press Start 2P', monospace" }}>
-              <span className="text-amber-400">▶</span> RELATED SKILLS
+              <span className="text-amber-400">▶</span> RELATED BRAINS
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {related.slice(0, 3).map((r: any) => (

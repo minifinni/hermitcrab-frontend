@@ -55,7 +55,7 @@ export default async function PackDetailPage({ params }: { params: { id: string 
                 className="text-[8px] text-amber-400 border border-amber-400/50 px-2 py-0.5"
                 style={{ fontFamily: "'Press Start 2P', monospace" }}
               >
-                SKILL PACK
+                BRAIN PACK
               </span>
               <span className="text-[8px] text-gray-500">
                 {domainLabel(pack.domain)}
@@ -82,18 +82,24 @@ export default async function PackDetailPage({ params }: { params: { id: string 
             )}
             <div className="mt-4 flex items-center gap-4">
               <span className="text-[8px] text-gray-500">
-                {pack.skill_count} skill{pack.skill_count !== 1 ? 's' : ''}
+                {pack.skill_count} brain{pack.skill_count !== 1 ? 's' : ''}
               </span>
+              <button
+                className="text-[8px] text-black bg-amber-400 hover:bg-amber-300 transition-colors px-4 py-2"
+                style={{ fontFamily: "'Press Start 2P', monospace" }}
+              >
+                RENT THIS PACK →
+              </button>
             </div>
           </div>
         </div>
 
-        {/* Skills Grid */}
+        {/* Brains Grid */}
         <h2
           className="text-[9px] text-white mb-6"
           style={{ fontFamily: "'Press Start 2P', monospace" }}
         >
-          <span className="text-amber-400">▶</span> SKILLS IN THIS PACK ({skills.length})
+          <span className="text-amber-400">▶</span> BRAINS IN THIS PACK ({skills.length})
         </h2>
 
         {skills.length === 0 ? (
@@ -105,7 +111,7 @@ export default async function PackDetailPage({ params }: { params: { id: string 
               className="text-gray-500 text-[10px]"
               style={{ fontFamily: "'Press Start 2P', monospace" }}
             >
-              NO SKILLS IN THIS PACK YET
+              NO BRAINS IN THIS PACK YET
             </p>
           </div>
         ) : (

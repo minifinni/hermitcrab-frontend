@@ -49,12 +49,12 @@ export default async function HomePage() {
             className="text-2xl md:text-3xl text-white leading-relaxed"
             style={{ fontFamily: "'Press Start 2P', monospace" }}
           >
-            Decisions{" "}
-            <span className="text-amber-400">with confidence.</span>
+            Rent a{" "}
+            <span className="text-amber-400">brain.</span>
           </h1>
 
           <p className="text-sm text-gray-400 max-w-lg leading-relaxed">
-            Not just information — expert opinions you can act on.{" "}
+            Temporarily borrow an expert's decision-making mind.{" "}
             <span className="text-amber-400">Someone you trust already decided.</span>
           </p>
 
@@ -77,7 +77,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── What is a skill ── */}
+      {/* ── What is a brain ── */}
       <section className="border-b border-[#2a2d35] bg-[#0d0f14] py-14">
         <div className="max-w-5xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-3 gap-6">
           {[
@@ -116,7 +116,7 @@ export default async function HomePage() {
           >
             <p className="text-xs text-gray-400 leading-relaxed">
               <span className="text-white font-medium">A prompt file tells your AI how to behave.</span>{" "}
-              A hermitcrab skill gives it actual knowledge to retrieve — like the difference between telling someone "be a doctor" and handing them a searchable medical textbook written by the best doctors alive.
+              A hermitcrab brain gives it actual expertise to rent — like borrowing a doctor's mind for a specific diagnosis instead of reading a generic textbook. You're not buying a tool, you're temporarily renting an expert's decision-making brain.
             </p>
           </div>
         </div>
@@ -129,7 +129,7 @@ export default async function HomePage() {
             className="text-amber-400 text-[10px] tracking-wider"
             style={{ fontFamily: "'Press Start 2P', monospace" }}
           >
-            {packs.length || 0} skill packs · {totalSkills || 50} expert opinions · {creators.length || 0} creators
+            {packs.length || 0} brain packs · {totalSkills || 50} expert brains · {creators.length || 0} creators
           </p>
         </div>
       </section>
@@ -142,7 +142,7 @@ export default async function HomePage() {
               className="text-sm text-white"
               style={{ fontFamily: "'Press Start 2P', monospace" }}
             >
-              FEATURED PACKS
+              FEATURED BRAIN PACKS
             </h2>
             <Link
               href="/packs"
@@ -315,10 +315,10 @@ export default async function HomePage() {
           style={{ fontFamily: "'Press Start 2P', monospace" }}
         >
           Know something.{" "}
-          <span className="text-amber-400">Sell the brain.</span>
+          <span className="text-amber-400">Rent your brain.</span>
         </h2>
         <p className="text-sm text-gray-400 mb-8 max-w-md mx-auto">
-          If you're an expert in anything — cooking, SEO, finance, copywriting — your knowledge can become a skill other AIs load and use. Publish once. Earn every time.
+          If you're an expert in anything — cooking, SEO, finance, copywriting — your decision-making brain can be rented by others. Publish once. Earn every time someone borrows your mind.
         </p>
         <Link
           href="/sell"
