@@ -127,7 +127,7 @@ export default function SkillsPage() {
                   {doneCreators.map((creator) => (
                     <Link
                       key={creator.handle}
-                      href={`/creators/${creator.handle}`}
+                      href={`/creators/${creator.handle.replace(/^@/, "")}`}
                     >
                       <div
                         className="bg-[#161920] border-2 border-[#2a2d35] hover:border-amber-400 p-6 h-full transition-all duration-150 flex flex-col gap-4 cursor-pointer group"

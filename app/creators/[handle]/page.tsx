@@ -20,7 +20,8 @@ function categoryEmoji(category: string) {
 }
 
 export default async function CreatorPage({ params }: { params: Promise<{ handle: string }> }) {
-  const { handle } = await params;
+  const { handle: rawHandle } = await params;
+  const handle = `@${rawHandle.replace(/^@/, "")}`;
   let creator: any = null;
   let skills: any[] = [];
 
