@@ -8,7 +8,8 @@ export default async function PacksPage() {
   let packs: any[] = [];
 
   try {
-    packs = await getPacks();
+    const all = await getPacks();
+    packs = all.filter(p => p.pack_type === "topic");
   } catch {
     // fallback to empty — page still renders
   }
@@ -59,9 +60,9 @@ export default async function PacksPage() {
                     >
                       {pack.name}
                     </h2>
-                    {pack.creator_name && (
-                      <p className="text-[8px] text-gray-500 mt-2">
-                        by {pack.creator_name}
+                    {pack.description && (
+                      <p className="text-xs text-gray-500 mt-2 line-clamp-2">
+                        {pack.description}
                       </p>
                     )}
                   </div>
@@ -117,15 +118,12 @@ export default async function PacksPage() {
 
         {/* Browse All Link */}
         <div className="mt-12 text-center">
-          <p className="text-sm text-gray-500 mb-4">
-            Looking for individual creators?
-          </p>
           <Link
             href="/skills"
             className="text-[9px] text-amber-400 hover:text-amber-300 transition-colors border border-amber-400/50 px-4 py-2 inline-block"
             style={{ fontFamily: "'Press Start 2P', monospace" }}
           >
-            BROWSE ALL CREATORS →
+            BROWSE ALL BRAINS →
           </Link>
         </div>
       </div>
