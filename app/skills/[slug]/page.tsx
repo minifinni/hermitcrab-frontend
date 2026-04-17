@@ -3,6 +3,7 @@ import { getSkill, getRelatedSkills, domainEmoji, domainLabel } from "@/lib/api"
 import HermitSprite from "@/components/HermitSprite";
 import { notFound } from "next/navigation";
 import DownloadButton from "@/components/DownloadButton";
+import { Lock } from "lucide-react";
 
 export const revalidate = 60;
 
@@ -35,11 +36,18 @@ export default async function SkillDetailPage({ params }: { params: Promise<{ sl
         <div className="bg-[#161920] border-2 border-[#2a2d35] p-8 mb-6"
           style={{ boxShadow: "3px 3px 0px #000" }}>
           <div className="flex items-start justify-between gap-4 mb-4">
-            
-            <span className="text-[8px] text-amber-400 border border-amber-400 px-3 py-1"
-              style={{ fontFamily: "'Press Start 2P', monospace" }}>
-              FREE
-            </span>
+            {skill.locked ? (
+              <div className="flex items-center gap-2 border border-gray-600 px-3 py-1">
+                <Lock size={10} className="text-gray-500" />
+                <span className="text-[8px] text-gray-500" style={{ fontFamily: "'Press Start 2P', monospace" }}>PAID</span>
+              </div>
+            ) : skill.tier === "paid" ? (
+              <span className="text-[8px] text-green-400 border border-green-400/50 px-3 py-1"
+                style={{ fontFamily: "'Press Start 2P', monospace" }}>UNLOCKED</span>
+            ) : (
+              <span className="text-[8px] text-amber-400 border border-amber-400 px-3 py-1"
+                style={{ fontFamily: "'Press Start 2P', monospace" }}>FREE</span>
+            )}
           </div>
           <h1 className="text-sm text-white leading-relaxed mb-3"
             style={{ fontFamily: "'Press Start 2P', monospace" }}>
@@ -134,6 +142,25 @@ export default async function SkillDetailPage({ params }: { params: Promise<{ sl
                 </div>
               ))}
             </div>
+          </div>
+        )}
+
+        {/* Locked paywall */}
+        {skill.locked && (
+          <div className="bg-[#161920] border-2 border-gray-700 p-8 mb-6 text-center"
+            style={{ boxShadow: "2px 2px 0px #000" }}>
+            <Lock size={28} className="text-gray-500 mx-auto mb-3" />
+            <p className="text-[9px] text-gray-400 mb-1" style={{ fontFamily: "'Press Start 2P', monospace" }}>
+              {skill.num_principles} principles locked
+            </p>
+            <p className="text-xs text-gray-500 mb-6">
+              You're seeing {Math.min(3, skill.principles?.length || 0)} of {skill.num_principles} principles. Subscribe to unlock the full brain including all quotes and decision frameworks.
+            </p>
+            <a href="/packs"
+              className="inline-block bg-amber-500 hover:bg-amber-400 text-black px-8 py-3 transition-colors"
+              style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "9px", boxShadow: "2px 2px 0px #000" }}>
+              SUBSCRIBE TO UNLOCK →
+            </a>
           </div>
         )}
 
