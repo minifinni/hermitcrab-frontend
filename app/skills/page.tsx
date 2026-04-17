@@ -33,7 +33,6 @@ export default function SkillsPage() {
   }, [creators, activeCategory]);
 
   const doneCreators = filteredCreators.filter((c) => c.status === "done");
-  const pendingCreators = filteredCreators.filter((c) => c.status !== "done");
 
   return (
     <div className="min-h-screen bg-[#0d0f14]">
@@ -122,7 +121,7 @@ export default function SkillsPage() {
                   className="text-[9px] text-gray-500 mb-4"
                   style={{ fontFamily: "'Press Start 2P', monospace" }}
                 >
-                  {doneCreators.length} AVAILABLE
+                  {doneCreators.length} BRAINS AVAILABLE
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
                   {doneCreators.map((creator) => (
@@ -163,31 +162,8 @@ export default function SkillsPage() {
                           </span>
                         </div>
 
-                        {/* Progress / Stats */}
+                        {/* Stats Footer */}
                         <div className="mt-auto pt-3 border-t border-[#2a2d35]">
-                          {(creator.progress_pct === 0 || creator.progress_pct === undefined) && (
-                            <p className="text-[7px] text-gray-500 mb-2" style={{ fontFamily: "'Press Start 2P', monospace" }}>
-                              QUEUED
-                            </p>
-                          )}
-                          {creator.progress_pct && creator.progress_pct > 0 && creator.progress_pct < 100 && (
-                            <div className="mb-2">
-                              <div className="h-1 bg-[#2a2d35] w-full mb-1">
-                                <div
-                                  className="h-full bg-amber-500"
-                                  style={{ width: `${creator.progress_pct}%` }}
-                                />
-                              </div>
-                              <p className="text-[7px] text-amber-500" style={{ fontFamily: "'Press Start 2P', monospace" }}>
-                                {creator.videos_processed || 0}/{creator.video_count} VIDEOS
-                              </p>
-                            </div>
-                          )}
-                          {creator.progress_pct === 100 && (
-                            <p className="text-[7px] text-green-500 mb-2" style={{ fontFamily: "'Press Start 2P', monospace" }}>
-                              ✓ READY
-                            </p>
-                          )}
                           <div className="flex items-center justify-between">
                             <div className="flex gap-3">
                               <span className="text-[8px] text-gray-500">
@@ -209,87 +185,6 @@ export default function SkillsPage() {
                         </div>
                       </div>
                     </Link>
-                  ))}
-                </div>
-              </>
-            )}
-
-            {/* Pending/Processing Creators - Greyed out */}
-            {pendingCreators.length > 0 && (
-              <>
-                <p
-                  className="text-[9px] text-gray-600 mb-4"
-                  style={{ fontFamily: "'Press Start 2P', monospace" }}
-                >
-                  {pendingCreators.length} COMING SOON
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 opacity-60">
-                  {pendingCreators.map((creator) => (
-                    <div
-                      key={creator.handle}
-                      className="bg-[#161920] border-2 border-[#2a2d35] p-6 h-full flex flex-col gap-4 cursor-not-allowed"
-                      style={{
-                        boxShadow: "2px 2px 0px #000",
-                      }}
-                    >
-                      {/* Header row */}
-                      <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 border-2 border-gray-700 flex items-center justify-center bg-[#0d0f14] flex-shrink-0 grayscale opacity-50">
-                          <HermitSprite domain={creator.category} size={56} />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p
-                            className="text-[10px] text-gray-400 truncate"
-                            style={{ fontFamily: "'Press Start 2P', monospace" }}
-                          >
-                            {creator.name}
-                          </p>
-                          <p className="text-[8px] text-gray-600 mt-1">
-                            @{creator.handle}
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Category + Progress */}
-                      <div className="flex flex-col gap-2">
-                        <span className="text-[7px] text-gray-600 uppercase tracking-widest border border-gray-700 px-2 py-0.5 w-fit">
-                          {creator.category}
-                        </span>
-
-                        {/* Progress indicator */}
-                        {(creator.progress_pct === 0 || creator.progress_pct === undefined) && (
-                          <p className="text-[7px] text-gray-500" style={{ fontFamily: "'Press Start 2P', monospace" }}>
-                            QUEUED
-                          </p>
-                        )}
-                        {creator.progress_pct && creator.progress_pct > 0 && creator.progress_pct < 100 && (
-                          <div>
-                            <div className="h-1 bg-[#2a2d35] w-full mb-1">
-                              <div
-                                className="h-full bg-amber-500"
-                                style={{ width: `${creator.progress_pct}%` }}
-                              />
-                            </div>
-                            <p className="text-[7px] text-amber-500" style={{ fontFamily: "'Press Start 2P', monospace" }}>
-                              {creator.videos_processed || 0}/{creator.video_count} VIDEOS
-                            </p>
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Stats placeholder */}
-                      <div className="mt-auto flex items-center justify-between pt-3 border-t border-[#2a2d35]">
-                        <span className="text-[8px] text-gray-600">
-                          {creator.video_count} sources
-                        </span>
-                        <span
-                          className="text-[8px] text-gray-600"
-                          style={{ fontFamily: "'Press Start 2P', monospace" }}
-                        >
-                          ...
-                        </span>
-                      </div>
-                    </div>
                   ))}
                 </div>
               </>

@@ -19,16 +19,17 @@ function categoryEmoji(category: string) {
   return map[category?.toLowerCase()] ?? "🐚";
 }
 
-export default async function CreatorPage({ params }: { params: { handle: string } }) {
+export default async function CreatorPage({ params }: { params: Promise<{ handle: string }> }) {
+  const { handle } = await params;
   let creator: any = null;
   let skills: any[] = [];
 
   try {
     const [creators, creatorSkills] = await Promise.all([
       getCreators(),
-      getSkillsByCreator(params.handle),
+      getSkillsByCreator(handle),
     ]);
-    creator = creators.find((c) => c.handle === params.handle);
+    creator = creators.find((c) => c.handle === handle);
     skills = creatorSkills;
   } catch {
     notFound();
@@ -75,41 +76,6 @@ export default async function CreatorPage({ params }: { params: { handle: string
               <span className="text-[8px] text-gray-500">{creator.video_count} sources</span>
             </div>
 
-            {/* Progress Section */}
-            <div className="mt-4 pt-4 border-t border-[#2a2d35]">
-              {/* Status Badge */}
-              {(creator.progress_pct === 0 || creator.progress_pct === undefined) && (
-                <span className="inline-block text-[8px] text-gray-400 uppercase tracking-widest border border-gray-600 bg-gray-800/50 px-3 py-1 mb-3" style={{ fontFamily: "'Press Start 2P', monospace" }}>
-                  ⏸ QUEUED
-                </span>
-              )}
-              {creator.progress_pct && creator.progress_pct > 0 && creator.progress_pct < 100 && (
-                <span className="inline-block text-[8px] text-amber-400 uppercase tracking-widest border border-amber-500/50 bg-amber-500/10 px-3 py-1 mb-3" style={{ fontFamily: "'Press Start 2P', monospace" }}>
-                  ▶ PROCESSING
-                </span>
-              )}
-              {creator.progress_pct === 100 && (
-                <span className="inline-block text-[8px] text-green-400 uppercase tracking-widest border border-green-500/50 bg-green-500/10 px-3 py-1 mb-3" style={{ fontFamily: "'Press Start 2P', monospace" }}>
-                  ✓ READY
-                </span>
-              )}
-
-              {/* Progress Bar */}
-              <div className="h-2 bg-[#2a2d35] w-full max-w-xs mb-2">
-                <div
-                  className={`h-full ${creator.progress_pct === 100 ? 'bg-green-500' : 'bg-amber-500'}`}
-                  style={{ width: `${creator.progress_pct || 0}%` }}
-                />
-              </div>
-
-              {/* Progress Text */}
-              <p className="text-[9px] text-gray-400" style={{ fontFamily: "'Press Start 2P', monospace" }}>
-                {creator.videos_processed || 0} OF {creator.video_count} VIDEOS PROCESSED
-                {creator.progress_pct !== undefined && creator.progress_pct > 0 && (
-                  <span className="text-amber-500 ml-2">({creator.progress_pct}%)</span>
-                )}
-              </p>
-            </div>
           </div>
         </div>
 
