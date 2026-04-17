@@ -8,6 +8,7 @@ const LINKS = [
   { href: "/sandbox", label: "Sandbox" },
   { href: "/skills", label: "Creators" },
   { href: "/sell", label: "Sell Your Skill" },
+  { href: "/brainify", label: "Brainify" },
 ];
 
 export default function NavLinks() {
