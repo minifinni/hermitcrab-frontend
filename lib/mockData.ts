@@ -8,7 +8,7 @@ export interface Skill {
   rating: number;
   ratingCount: number;
   price: string;
-  priceType: "free" | "paid" | "rental";
+  priceType: "free" | "paid" | "subscription";
   downloads: string;
   description: string;
   bullets: string[];
@@ -68,7 +68,7 @@ export const MOCK_SKILLS: Skill[] = [
     rating: 4,
     ratingCount: 134,
     price: "£0.99/mo",
-    priceType: "rental",
+    priceType: "subscription",
     downloads: "1.2k",
     description: "Turn your AI into an SEO powerhouse. Research keywords, generate structured content outlines, and write copy optimised to rank on Google — all in one skill.",
     bullets: [
@@ -152,7 +152,7 @@ export const MOCK_SKILLS: Skill[] = [
     rating: 4,
     ratingCount: 88,
     price: "£1.99/mo",
-    priceType: "rental",
+    priceType: "subscription",
     downloads: "743",
     description: "Write viral LinkedIn posts in seconds. This skill captures your voice and creates hooks, stories, and threads that build your personal brand.",
     bullets: [

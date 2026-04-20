@@ -194,7 +194,7 @@ export default async function SkillDetailPage({ params }: { params: Promise<{ sl
         {/* Rent CTA */}
         <div className="bg-[#161920] border-2 border-amber-400 p-8 mb-6 text-center"
           style={{ boxShadow: "4px 4px 0px #f59e0b40" }}>
-          <p className="text-[9px] text-gray-400 mb-2">Rent this brain for your AI · OpenClaw · Claude · ChatGPT</p>
+          <p className="text-[9px] text-gray-400 mb-2">Use this brain with your AI · OpenClaw · Claude · ChatGPT</p>
           <p className="text-[8px] text-gray-600 mb-5">{skill.num_principles} principles · semantic retrieval · per-use pricing</p>
           <DownloadButton skillId={skill.skill_id} />
           <p className="text-[8px] text-gray-600 mt-3">Free during beta · Pay per use soon</p>
@@ -204,7 +204,7 @@ export default async function SkillDetailPage({ params }: { params: Promise<{ sl
         {related.length > 0 && (
           <div>
             <h2 className="text-[9px] text-white mb-4" style={{ fontFamily: "'Press Start 2P', monospace" }}>
-              <span className="text-amber-400">▶</span> RELATED BRAINS
+              <span className="text-amber-400">▶</span> RELATED SKILLS
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {related.slice(0, 3).map((r: any) => (

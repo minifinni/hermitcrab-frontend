@@ -11,16 +11,16 @@ const STEPS = [
   {
     icon: Coins,
     step: "02",
-    title: "Set Your Rental Rate",
+    title: "Set Your Rate",
     description:
-      "Choose how much to charge for temporary access to your brain. One-time consultation, hourly rental, or subscription. You keep 85% of every rental.",
+      "Choose how much to charge for access to your expertise. One-time consultation or subscription. You keep 85% of every use.",
   },
   {
     icon: Users,
     step: "03",
-    title: "Let Others Rent You",
+    title: "Let Others Use Your Expertise",
     description:
-      "Your brain goes live on the marketplace. People don't download a skill—they temporarily hire YOUR decision-making. You earn while they think with your expertise.",
+      "Your brain goes live on the marketplace. People access YOUR decision-making frameworks on demand. You earn while they use your expertise.",
   },
 ];
 
@@ -41,11 +41,11 @@ export default function SellPage() {
           className="text-lg md:text-2xl text-white leading-relaxed mb-4"
           style={{ fontFamily: "'Press Start 2P', monospace" }}
         >
-          Rent Your{" "}
-          <span className="text-amber-400">Brain</span>
+          Share Your{" "}
+          <span className="text-amber-400">Expertise</span>
         </h1>
         <p className="text-sm text-gray-400 max-w-md mx-auto leading-relaxed">
-          Turn your expertise into income without selling out. People rent temporary access to how you think—not a static product. Your brain, on-demand.
+          Turn your expertise into income without selling out. People access how you think—not a static product. Your expertise, on-demand.
         </p>
       </div>
 
@@ -97,7 +97,7 @@ export default function SellPage() {
               fontFamily: "'Press Start 2P', monospace",
               boxShadow: "3px 3px 0px #000",
             }}
-            title="Coming soon — brain rental publishing is in development"
+            title="Coming soon — brain publishing is in development"
           >
             Upload Brain
           </button>
@@ -113,7 +113,7 @@ export default function SellPage() {
           </div>
         </div>
         <p className="text-xs text-gray-600 mt-4">
-          Brain rental marketplace launching soon. Drop your email to get early access.
+          Expert brain marketplace launching soon. Drop your email to get early access.
         </p>
 
         {/* Email capture */}
@@ -146,7 +146,7 @@ export default function SellPage() {
         <div className="flex justify-center gap-6">
           {[
             ["247", "Brains available"],
-            ["14.3k", "Brain rentals/week"],
+            ["14.3k", "Brain queries/week"],
             ["85%", "Avg. 4★+"],
           ].map(([num, label]) => (
             <div key={label} className="text-center">

@@ -1,9 +1,14 @@
 # HermitCrab — CLAUDE.md
 
 ## What is this project?
-HermitCrab is a **brain rental marketplace** for AI agents. Users rent temporary access to expert decision-making brains instead of buying static skills.
+HermitCrab is an **expert brain marketplace** for AI agents. Users access expert decision-making frameworks (skills) bundled into brains.
 
-**Core concept shift:** "Don't buy a skill. Rent a brain."
+**Core concept:** "Expert brains. Someone you trust already decided."
+
+**Terminology:**
+- **Skill** — the minimum unit. An individual expert knowledge file (e.g. GREG_001).
+- **Brain** — a collection of skills from one creator, plus context (like a gbrain).
+- **Brain Pack** — a curated topic pack bundling multiple brains/skills.
 
 ## Recent Changes (April 2026)
 

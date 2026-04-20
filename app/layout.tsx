@@ -11,9 +11,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Rent a Brain",
-  description: "Browse, rent, or download expert brains built by creators. Swap brains. Stay sharp.",
-  keywords: ["AI brains", "expert brains", "brain rental", "OpenClaw", "brain marketplace"],
+  title: "Hermitcrab — Expert Brains for AI",
+  description: "Browse expert brains built by creators. Get opinionated AI guidance from experts you trust. Stay sharp.",
+  keywords: ["AI brains", "expert brains", "OpenClaw", "brain marketplace", "expert knowledge"],
 };
 
 export default function RootLayout({

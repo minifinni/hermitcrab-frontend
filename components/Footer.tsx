@@ -12,13 +12,13 @@ export default function Footer() {
             >
               HERMITCRAB
             </span>
-            <p className="text-xs text-gray-600 mt-2">Brains your AI can rent.</p>
+            <p className="text-xs text-gray-600 mt-2">Expert brains for your AI.</p>
           </div>
 
           <div className="flex items-center gap-8">
             {[
               ["Browse", "/skills"],
-              ["Rent", "/sell"],
+              ["Publish", "/sell"],
               ["Brains", "/creators"],
               ["Docs", "#"],
               ["Twitter", "#"],

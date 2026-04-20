@@ -95,7 +95,7 @@ export default async function DashboardPage() {
             className="text-[9px] text-white mb-4"
             style={{ fontFamily: "'Press Start 2P', monospace" }}
           >
-            <span className="text-amber-400">▶</span> MY RENTED BRAINS
+            <span className="text-amber-400">▶</span> MY BRAINS
           </h2>
 
           {!entitlements || entitlements.length === 0 ? (
@@ -107,7 +107,7 @@ export default async function DashboardPage() {
                 className="text-[8px] text-gray-500 mb-4 leading-loose"
                 style={{ fontFamily: "'Press Start 2P', monospace" }}
               >
-                No brains rented yet. Start browsing!
+                No brains yet. Start browsing!
               </p>
               <Link
                 href="/skills"
@@ -117,7 +117,7 @@ export default async function DashboardPage() {
                   boxShadow: '2px 2px 0px #000',
                 }}
               >
-                RENT A BRAIN →
+                ADD A BRAIN →
               </Link>
             </div>
           ) : (
@@ -168,7 +168,7 @@ export default async function DashboardPage() {
                 boxShadow: '2px 2px 0px #000',
               }}
             >
-              RENT MORE BRAINS →
+              ADD MORE BRAINS →
             </Link>
           </div>
         )}

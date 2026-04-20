@@ -50,12 +50,12 @@ export default async function HomePage() {
             className="text-2xl md:text-3xl text-white leading-relaxed"
             style={{ fontFamily: "'Press Start 2P', monospace" }}
           >
-            Rent a{" "}
-            <span className="text-amber-400">brain.</span>
+            Expert{" "}
+            <span className="text-amber-400">brains.</span>
           </h1>
 
           <p className="text-sm text-gray-400 max-w-lg leading-relaxed">
-            Temporarily borrow an expert's decision-making mind.{" "}
+            Get an expert's decision-making applied to your exact situation.{" "}
             <span className="text-amber-400">Someone you trust already decided.</span>
           </p>
 
@@ -117,7 +117,7 @@ export default async function HomePage() {
           >
             <p className="text-xs text-gray-400 leading-relaxed">
               <span className="text-white font-medium">A prompt file tells your AI how to behave.</span>{" "}
-              A hermitcrab brain gives it actual expertise to rent — like borrowing a doctor's mind for a specific diagnosis instead of reading a generic textbook. You're not buying a tool, you're temporarily renting an expert's decision-making brain.
+              A hermitcrab brain gives your AI actual expertise — like plugging in a doctor's mind for a specific diagnosis instead of reading a generic textbook. You're not buying a tool, you're adding an expert's decision-making to your agent.
             </p>
           </div>
         </div>
@@ -130,7 +130,7 @@ export default async function HomePage() {
             className="text-amber-400 text-[10px] tracking-wider"
             style={{ fontFamily: "'Press Start 2P', monospace" }}
           >
-            {packs.length || 0} brain packs · {totalSkills || 50} expert brains · {creators.length || 0} creators
+            {packs.length || 0} brain packs · {totalSkills || 50} expert skills · {creators.length || 0} creators
           </p>
         </div>
       </section>
@@ -303,10 +303,10 @@ export default async function HomePage() {
           style={{ fontFamily: "'Press Start 2P', monospace" }}
         >
           Know something.{" "}
-          <span className="text-amber-400">Rent your brain.</span>
+          <span className="text-amber-400">Share your expertise.</span>
         </h2>
         <p className="text-sm text-gray-400 mb-8 max-w-md mx-auto">
-          If you're an expert in anything — cooking, SEO, finance, copywriting — your decision-making brain can be rented by others. Publish once. Earn every time someone borrows your mind.
+          If you're an expert in anything — cooking, SEO, finance, copywriting — your decision-making brain can be used by others. Publish once. Earn every time someone borrows your mind.
         </p>
         <Link
           href="/sell"

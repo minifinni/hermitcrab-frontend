@@ -68,12 +68,12 @@ export default async function CreatorPage({ params }: { params: Promise<{ handle
             >
               {creator.name}
             </h1>
-            <p className="text-[9px] text-gray-500 mb-3">@{creator.handle}</p>
+            <p className="text-[9px] text-gray-500 mb-3">{creator.handle}</p>
             <div className="flex flex-wrap gap-3 items-center">
               <span className="text-[7px] text-amber-600 uppercase tracking-widest border border-amber-600/30 bg-amber-600/10 px-2 py-0.5">
                 {creator.category}
               </span>
-              <span className="text-[8px] text-gray-500">{skills.length} brains available</span>
+              <span className="text-[8px] text-gray-500">{skills.length} skills</span>
               <span className="text-[8px] text-gray-500">{creator.video_count} sources</span>
             </div>
 
@@ -100,12 +100,12 @@ export default async function CreatorPage({ params }: { params: Promise<{ handle
           className="text-[9px] text-white mb-6"
           style={{ fontFamily: "'Press Start 2P', monospace" }}
         >
-          <span className="text-amber-400">▶</span> RENT {creator.name.toUpperCase()}'S BRAIN ({skills.length})
+          <span className="text-amber-400">▶</span> {creator.name.toUpperCase()}'S SKILLS ({skills.length})
         </h2>
 
         {skills.length === 0 ? (
           <p className="text-[9px] text-gray-500" style={{ fontFamily: "'Press Start 2P', monospace" }}>
-            No brains available yet.
+            No skills available yet.
           </p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -124,7 +124,7 @@ export default async function CreatorPage({ params }: { params: Promise<{ handle
                       className="text-[8px] text-amber-400 border border-amber-400/50 px-2 py-0.5"
                       style={{ fontFamily: "'Press Start 2P', monospace" }}
                     >
-                      RENT
+                      USE
                     </span>
                   </div>
 

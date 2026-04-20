@@ -83,7 +83,7 @@ export default async function BrainPage({ params }: { params: Promise<{ slug: st
             className="bg-amber-500 hover:bg-amber-400 text-black px-6 py-3 transition-colors"
             style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "8px", boxShadow: "2px 2px 0px #000" }}
           >
-            RENT BRAIN →
+            USE BRAIN →
           </button>
           <a
             href={`/brains/${slug}/raw`}

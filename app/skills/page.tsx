@@ -52,10 +52,10 @@ export default function SkillsPage() {
             className="text-lg text-white mb-2"
             style={{ fontFamily: "'Press Start 2P', monospace" }}
           >
-            <span className="text-amber-400">▶</span> RENT A BRAIN
+            <span className="text-amber-400">▶</span> EXPERT BRAINS
           </h1>
           <p className="text-sm text-gray-400">
-            Access an expert's decision-making engine. Rent their brain by the minute—get confidence to act, not just information.
+            Access an expert's decision-making engine. Get expert judgment on demand—confidence to act, not just information.
           </p>
         </div>
 
@@ -121,7 +121,7 @@ export default function SkillsPage() {
                   className="text-[9px] text-gray-500 mb-4"
                   style={{ fontFamily: "'Press Start 2P', monospace" }}
                 >
-                  {doneCreators.length} BRAINS AVAILABLE
+                  {doneCreators.length} CREATORS AVAILABLE
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
                   {doneCreators.map((creator) => (
@@ -150,7 +150,7 @@ export default function SkillsPage() {
                               {creator.name}
                             </p>
                             <p className="text-[8px] text-gray-500 mt-1">
-                              @{creator.handle}
+                              {creator.handle}
                             </p>
                           </div>
                         </div>
@@ -167,7 +167,7 @@ export default function SkillsPage() {
                           <div className="flex items-center justify-between">
                             <div className="flex gap-3">
                               <span className="text-[8px] text-gray-500">
-                                {creator.skill_count || 0} brains
+                                {creator.skill_count || 0} skills
                               </span>
                               <span className="text-[8px] text-gray-500">
                                 {creator.video_count} sources

@@ -26,7 +26,7 @@ export default async function PacksPage() {
             <span className="text-amber-400">▶</span> BRAIN PACKS
           </h1>
           <p className="text-sm text-gray-400 max-w-xl">
-            Collections of related expert brains you can rent. Each pack bundles domain-specific expertise from trusted creators.
+            Collections of related expert skills from trusted creators. Each pack bundles domain-specific expertise you can apply with your AI.
           </p>
         </div>
 
@@ -77,7 +77,7 @@ export default async function PacksPage() {
                   {/* Stats Footer */}
                   <div className="mt-auto pt-4 border-t border-[#2a2d35] flex items-center justify-between">
                     <span className="text-[8px] text-gray-500">
-                      {pack.skill_count} brain{pack.skill_count !== 1 ? 's' : ''}
+                      {pack.skill_count} skill{pack.skill_count !== 1 ? 's' : ''}
                     </span>
                     <span
                       className="text-[8px] text-amber-400 group-hover:text-amber-300 transition-colors"

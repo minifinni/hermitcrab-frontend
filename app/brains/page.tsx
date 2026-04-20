@@ -15,7 +15,7 @@ export default function BrainsPage() {
           className="text-[7px] text-amber-400 uppercase tracking-widest mb-3"
           style={{ fontFamily: "'Press Start 2P', monospace" }}
         >
-          ▶ RENT A BRAIN
+          ▶ EXPERT BRAINS
         </div>
         <h1
           className="text-xl text-white mb-4"
@@ -24,7 +24,7 @@ export default function BrainsPage() {
           Expert Brains
         </h1>
         <p className="text-gray-400 text-sm max-w-xl">
-          Someone you trust already decided. Rent their decision-making framework
+          Someone you trust already decided. Use their decision-making framework
           and get opinionated guidance you can act on.
         </p>
       </div>
@@ -88,7 +88,7 @@ export default function BrainsPage() {
                 className="text-[7px] text-amber-400 mt-4"
                 style={{ fontFamily: "'Press Start 2P', monospace" }}
               >
-                RENT BRAIN →
+                USE BRAIN →
               </div>
             </div>
           </Link>
@@ -108,7 +108,7 @@ export default function BrainsPage() {
         </div>
         <p className="text-gray-400 text-sm mb-6">
           Upload transcripts and we'll extract the frameworks, mental models, and
-          decisions into a rentable brain.
+          decisions into an expert brain.
         </p>
         <Link
           href="/brainify"

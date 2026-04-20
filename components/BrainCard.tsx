@@ -77,7 +77,7 @@ export default function BrainCard({ brain, compact = false }: BrainCardProps) {
             </span>
           ) : (
             <span className="text-[7px] text-amber-400/60" style={{ fontFamily: "'Press Start 2P', monospace" }}>
-              RENT →
+              USE →
             </span>
           )}
         </div>
