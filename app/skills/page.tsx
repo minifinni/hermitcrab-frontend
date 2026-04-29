@@ -52,7 +52,7 @@ export default function SkillsPage() {
             className="text-lg text-white mb-2"
             style={{ fontFamily: "'Press Start 2P', monospace" }}
           >
-            <span className="text-amber-400">▶</span> EXPERT BRAINS
+            <span className="text-amber-400">▶</span> EXPERT SKILLS
           </h1>
           <p className="text-sm text-gray-400">
             Access an expert's decision-making engine. Get expert judgment on demand—confidence to act, not just information.
@@ -197,7 +197,7 @@ export default function SkillsPage() {
                   className="text-gray-500 text-[10px]"
                   style={{ fontFamily: "'Press Start 2P', monospace" }}
                 >
-                  NO BRAINS FOUND
+                  NO SKILLS FOUND
                 </p>
               </div>
             )}

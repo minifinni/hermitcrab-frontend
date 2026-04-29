@@ -44,7 +44,7 @@ export default async function BrainPage({ params }: { params: Promise<{ slug: st
               className="text-[6px] text-amber-400 border border-amber-400/40 inline-block px-2 py-1 mb-3 uppercase tracking-widest"
               style={{ fontFamily: "'Press Start 2P', monospace" }}
             >
-              BRAIN
+              SKILLS
             </div>
             <h1
               className="text-sm text-white mb-2 leading-relaxed"

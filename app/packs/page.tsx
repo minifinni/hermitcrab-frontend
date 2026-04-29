@@ -123,7 +123,7 @@ export default async function PacksPage() {
             className="text-[9px] text-amber-400 hover:text-amber-300 transition-colors border border-amber-400/50 px-4 py-2 inline-block"
             style={{ fontFamily: "'Press Start 2P', monospace" }}
           >
-            BROWSE ALL BRAINS →
+            BROWSE ALL SKILLS →
           </Link>
         </div>
       </div>

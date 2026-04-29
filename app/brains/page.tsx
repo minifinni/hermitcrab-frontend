@@ -15,7 +15,7 @@ export default function BrainsPage() {
           className="text-[7px] text-amber-400 uppercase tracking-widest mb-3"
           style={{ fontFamily: "'Press Start 2P', monospace" }}
         >
-          ▶ EXPERT BRAINS
+          ▶ EXPERT SKILLS
         </div>
         <h1
           className="text-xl text-white mb-4"
@@ -44,7 +44,7 @@ export default function BrainsPage() {
                   className="text-[6px] text-amber-400 border border-amber-400/40 px-2 py-1 uppercase tracking-widest"
                   style={{ fontFamily: "'Press Start 2P', monospace" }}
                 >
-                  BRAIN
+                  SKILLS
                 </div>
               </div>
 
