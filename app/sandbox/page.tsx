@@ -64,6 +64,9 @@ export default function SandboxPage() {
   const [hoveredCrab, setHoveredCrab] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [sparkLoading, setSparkLoading] = useState(false);
+  const [sparkResult, setSparkResult] = useState<string>("");
+  const [sparkOpen, setSparkOpen] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const animRef = useRef<number | null>(null);
@@ -256,6 +259,42 @@ export default function SandboxPage() {
     a.download = `${currentSandbox.name.replace(/\s+/g, "_")}_SKILL.md`;
     a.click();
     URL.revokeObjectURL(url);
+  }
+
+  /* ── Spark idea generation ── */
+  async function sparkIdea() {
+    if (!currentSandbox || currentSandbox.crabIds.length < 2) return;
+    setSparkLoading(true);
+    setSparkResult("");
+    setSparkOpen(true);
+    setSettingsOpen(false);
+
+    try {
+      const res = await fetch("/api/sandbox/spark", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pack_ids: currentSandbox.crabIds }),
+      });
+
+      if (!res.ok || !res.body) {
+        setSparkResult("Failed to generate ideas. Try again.");
+        return;
+      }
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let text = "";
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        text += decoder.decode(value, { stream: true });
+        setSparkResult(text);
+      }
+    } catch {
+      setSparkResult("Something went wrong. Try again.");
+    } finally {
+      setSparkLoading(false);
+    }
   }
 
   /* ── Render ── */
@@ -668,6 +707,21 @@ export default function SandboxPage() {
                     )}
                   </div>
 
+                  {/* Spark button */}
+                  <button
+                    onClick={sparkIdea}
+                    disabled={currentSandbox.crabIds.length < 2 || sparkLoading}
+                    className="w-full text-[8px] px-4 py-2.5 border-2 border-amber-400 text-black bg-amber-400 hover:bg-amber-300 disabled:opacity-30 disabled:cursor-not-allowed transition-all mb-3"
+                    style={PIXEL_FONT}
+                  >
+                    {sparkLoading ? "SPARKING..." : "⚡ SPARK IDEA"}
+                  </button>
+                  {currentSandbox.crabIds.length < 2 && (
+                    <p className="text-[6px] text-gray-600 text-center mb-3" style={PIXEL_FONT}>
+                      Add 2+ experts to spark
+                    </p>
+                  )}
+
                   {/* Export button */}
                   <button
                     onClick={exportSkillMd}
@@ -704,6 +758,102 @@ export default function SandboxPage() {
           <span>Create project sandboxes to curate your expert team</span>
         </div>
       </div>
+
+      {/* ── Spark result overlay ── */}
+      {sparkOpen && (
+        <>
+          <div
+            className="fixed inset-0 bg-black/60 z-[90]"
+            onClick={() => setSparkOpen(false)}
+          />
+          <div
+            className="fixed top-1/2 left-1/2 z-[100] bg-[#0d0f14] border-2 border-amber-400 overflow-y-auto"
+            style={{
+              transform: "translate(-50%, -50%)",
+              width: "min(720px, 92vw)",
+              maxHeight: "80vh",
+              boxShadow: "4px 4px 0px #000",
+            }}
+          >
+            <div className="p-6">
+              {/* Header */}
+              <div className="flex items-center justify-between mb-5">
+                <div>
+                  <h2 className="text-[10px] text-amber-400" style={PIXEL_FONT}>
+                    ⚡ IDEA SPARK
+                  </h2>
+                  <p className="text-[7px] text-gray-500 mt-1" style={PIXEL_FONT}>
+                    {currentSandbox?.name} — {currentSandbox?.crabIds.length} experts
+                  </p>
+                </div>
+                <div className="flex items-center gap-3">
+                  {!sparkLoading && sparkResult && (
+                    <button
+                      onClick={sparkIdea}
+                      className="text-[7px] text-amber-400 border border-amber-400/50 px-3 py-1.5 hover:bg-amber-400/10 transition-all"
+                      style={PIXEL_FONT}
+                    >
+                      ↺ RESPARK
+                    </button>
+                  )}
+                  <button
+                    onClick={() => setSparkOpen(false)}
+                    className="text-gray-400 hover:text-white text-xl leading-none"
+                  >
+                    &times;
+                  </button>
+                </div>
+              </div>
+
+              {/* Result */}
+              {sparkLoading && !sparkResult && (
+                <div className="py-12 text-center">
+                  <p className="text-[9px] text-amber-400 animate-pulse" style={PIXEL_FONT}>
+                    CRABS ARE THINKING...
+                  </p>
+                  <p className="text-[7px] text-gray-600 mt-2" style={PIXEL_FONT}>
+                    combining expert frameworks
+                  </p>
+                </div>
+              )}
+
+              {sparkResult && (
+                <div className="prose prose-invert prose-sm max-w-none">
+                  <div className="text-gray-300 text-xs leading-relaxed whitespace-pre-wrap font-mono">
+                    {sparkResult}
+                    {sparkLoading && (
+                      <span className="inline-block w-2 h-3 bg-amber-400 ml-0.5 animate-pulse" />
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Expert chips at bottom */}
+              {currentSandbox && currentSandbox.crabIds.length > 0 && (
+                <div className="mt-6 pt-4 border-t border-[#2a2d35] flex flex-wrap gap-2">
+                  {currentSandbox.crabIds.map((cid) => {
+                    const p = packs.find((pk) => pk.pack_id === cid);
+                    if (!p) return null;
+                    return (
+                      <div key={cid} className="flex items-center gap-1.5 bg-[#161920] border border-[#2a2d35] px-2 py-1">
+                        <Image
+                          src={domainSprite(p.domain)}
+                          alt=""
+                          width={14}
+                          height={14}
+                          style={{ imageRendering: "pixelated" }}
+                          unoptimized
+                        />
+                        <span className="text-[6px] text-gray-400" style={PIXEL_FONT}>{p.name}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </div>
+        </>
+      )}
 
       {/* Slide-in animation */}
       <style jsx>{`
