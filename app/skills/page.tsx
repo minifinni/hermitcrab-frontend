@@ -1,16 +1,23 @@
 "use client";
 
 import { useEffect, useState, useMemo } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { getCreators, ApiCreator, domainEmoji } from "@/lib/api";
+import { getCreators, ApiCreator, domainEmoji, searchSkills, ApiSearchResult } from "@/lib/api";
 import HermitSprite from "@/components/HermitSprite";
 
 const categoryEmoji = domainEmoji;
 
 export default function SkillsPage() {
+  const searchParams = useSearchParams();
+  const initialQuery = searchParams.get("q") || "";
+
   const [creators, setCreators] = useState<ApiCreator[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState<string>("all");
+  const [searchQuery, setSearchQuery] = useState(initialQuery);
+  const [searchResults, setSearchResults] = useState<ApiSearchResult[]>([]);
+  const [searchLoading, setSearchLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -19,6 +26,25 @@ export default function SkillsPage() {
       .catch(() => setCreators([]))
       .finally(() => setLoading(false));
   }, []);
+
+  // Run search when arriving with ?q=
+  useEffect(() => {
+    if (!initialQuery) return;
+    setSearchLoading(true);
+    searchSkills(initialQuery, undefined, 8)
+      .then(setSearchResults)
+      .catch(() => setSearchResults([]))
+      .finally(() => setSearchLoading(false));
+  }, [initialQuery]);
+
+  function runSearch(q: string) {
+    if (!q.trim()) { setSearchResults([]); return; }
+    setSearchLoading(true);
+    searchSkills(q, undefined, 8)
+      .then(setSearchResults)
+      .catch(() => setSearchResults([]))
+      .finally(() => setSearchLoading(false));
+  }
 
   // Extract unique categories for filter
   const categories = useMemo(() => {
@@ -58,6 +84,69 @@ export default function SkillsPage() {
             Access an expert's decision-making engine. Get expert judgment on demand—confidence to act, not just information.
           </p>
         </div>
+
+        {/* Search bar */}
+        <div className="mb-8">
+          <div className="flex gap-2">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && runSearch(searchQuery)}
+              placeholder="Ask an expert anything..."
+              className="flex-1 text-[9px] bg-[#161920] border-2 border-[#2a2d35] focus:border-amber-400 text-gray-200 px-4 py-3 outline-none placeholder:text-gray-600"
+              style={{ fontFamily: "'Press Start 2P', monospace" }}
+            />
+            <button
+              onClick={() => runSearch(searchQuery)}
+              className="text-[8px] bg-amber-500 hover:bg-amber-400 text-black px-4 py-3 transition-colors"
+              style={{ fontFamily: "'Press Start 2P', monospace", boxShadow: "2px 2px 0px #000" }}
+            >
+              ASK →
+            </button>
+          </div>
+        </div>
+
+        {/* Search results */}
+        {(searchResults.length > 0 || searchLoading) && (
+          <div className="mb-10">
+            <p className="text-[8px] text-gray-500 mb-4" style={{ fontFamily: "'Press Start 2P', monospace" }}>
+              {searchLoading ? "SEARCHING..." : `${searchResults.length} RESULTS`}
+            </p>
+            {searchLoading ? (
+              <p className="text-[9px] text-amber-400 animate-pulse" style={{ fontFamily: "'Press Start 2P', monospace" }}>LOADING...</p>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                {searchResults.map((r) => (
+                  <Link key={r.skill.skill_id} href={`/creators/${r.skill.chef?.replace(/^@/, "") || r.skill.skill_id}`}>
+                    <div
+                      className="bg-[#161920] border border-[#2a2d35] hover:border-amber-400 p-4 transition-all cursor-pointer group"
+                      style={{ boxShadow: "2px 2px 0px #000" }}
+                    >
+                      <div className="flex items-start justify-between mb-2">
+                        <p className="text-[8px] text-white group-hover:text-amber-300 transition-colors leading-relaxed" style={{ fontFamily: "'Press Start 2P', monospace" }}>
+                          {r.skill.title}
+                        </p>
+                        <span className="text-[6px] text-amber-400/60 ml-2 shrink-0">{Math.round(r.score * 100)}%</span>
+                      </div>
+                      {r.matching_principles?.[0] && (
+                        <p className="text-[10px] text-gray-500 leading-relaxed mt-2">
+                          • {r.matching_principles[0].principle}
+                        </p>
+                      )}
+                      <p className="text-[7px] text-amber-400/60 mt-2" style={{ fontFamily: "'Press Start 2P', monospace" }}>
+                        {r.skill.chef} →
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
+            <div className="border-t border-[#2a2d35] pt-6">
+              <p className="text-[8px] text-gray-600 mb-4" style={{ fontFamily: "'Press Start 2P', monospace" }}>OR BROWSE BY EXPERT</p>
+            </div>
+          </div>
+        )}
 
         {/* Category filters */}
         <div className="mb-10">
