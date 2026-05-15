@@ -60,6 +60,23 @@ export default function SkillsPage() {
 
   const doneCreators = filteredCreators.filter((c) => c.status === "done");
 
+  // Map creator name → handle for search result links
+  const creatorHandleByName = useMemo(() => {
+    const map: Record<string, string> = {};
+    for (const c of creators) {
+      map[c.name.toLowerCase()] = c.handle.replace(/^@/, "");
+    }
+    return map;
+  }, [creators]);
+
+  function resolveCreatorHandle(skill: ApiSearchResult["skill"]): string {
+    const byName = creatorHandleByName[skill.chef?.toLowerCase() ?? ""];
+    if (byName) return byName;
+    // Fall back to skill_id prefix (e.g. ALEX_044 → ALEX)
+    const prefix = skill.skill_id.split("_")[0];
+    return prefix;
+  }
+
   return (
     <div className="min-h-screen bg-[#0d0f14]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -118,7 +135,7 @@ export default function SkillsPage() {
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                 {searchResults.map((r) => (
-                  <Link key={r.skill.skill_id} href={`/creators/${r.skill.chef?.replace(/^@/, "") || r.skill.skill_id}`}>
+                  <Link key={r.skill.skill_id} href={`/creators/${resolveCreatorHandle(r.skill)}`}>
                     <div
                       className="bg-[#161920] border border-[#2a2d35] hover:border-amber-400 p-4 transition-all cursor-pointer group"
                       style={{ boxShadow: "2px 2px 0px #000" }}
