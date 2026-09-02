@@ -29,15 +29,22 @@ export default function ApiKeysPage() {
     supabase.auth.getUser().then(({ data: { user } }) => {
       if (!user) { router.push("/login"); return; }
       setUserEmail(user.email || null);
-      fetchKeys(user.email!);
+      fetchKeys();
     });
   }, []);
 
-  async function fetchKeys(email: string) {
+  async function authHeaders(): Promise<Record<string, string>> {
+    const supabase = createClient();
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) { router.push("/login"); throw new Error("Not signed in"); }
+    return { Authorization: `Bearer ${session.access_token}` };
+  }
+
+  async function fetchKeys() {
     setLoading(true);
     try {
       const res = await fetch(`${API_URL}/v1/keys`, {
-        headers: { "X-User-Email": email },
+        headers: await authHeaders(),
       });
       if (res.ok) setKeys(await res.json());
     } catch {}
@@ -50,14 +57,14 @@ export default function ApiKeysPage() {
     try {
       const res = await fetch(`${API_URL}/v1/keys`, {
         method: "POST",
-        headers: { "X-User-Email": userEmail, "Content-Type": "application/json" },
+        headers: { ...(await authHeaders()), "Content-Type": "application/json" },
         body: JSON.stringify({ name: newKeyName.trim() }),
       });
       if (res.ok) {
         const data = await res.json();
         setNewKeyValue(data.api_key);
         setNewKeyName("");
-        fetchKeys(userEmail);
+        fetchKeys();
       }
     } catch {}
     setGenerating(false);
@@ -69,9 +76,9 @@ export default function ApiKeysPage() {
     try {
       await fetch(`${API_URL}/v1/keys/${prefix}`, {
         method: "DELETE",
-        headers: { "X-User-Email": userEmail },
+        headers: await authHeaders(),
       });
-      fetchKeys(userEmail);
+      fetchKeys();
     } catch {}
   }
 

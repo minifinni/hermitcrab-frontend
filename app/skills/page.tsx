@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { Suspense, useEffect, useState, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { getCreators, ApiCreator, domainEmoji, searchSkills, ApiSearchResult } from "@/lib/api";
@@ -8,7 +8,7 @@ import HermitSprite from "@/components/HermitSprite";
 
 const categoryEmoji = domainEmoji;
 
-export default function SkillsPage() {
+function SkillsPageContent() {
   const searchParams = useSearchParams();
   const initialQuery = searchParams.get("q") || "";
 
@@ -311,5 +311,13 @@ export default function SkillsPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function SkillsPage() {
+  return (
+    <Suspense fallback={null}>
+      <SkillsPageContent />
+    </Suspense>
   );
 }
